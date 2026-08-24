@@ -1,0 +1,46 @@
+name: Package website release
+description: Validate website-release.yml and create the public lesson bundle.
+
+inputs:
+  manifest:
+    description: Path to the release manifest in the lesson repository.
+    required: false
+    default: website-release.yml
+  tag:
+    description: Git tag being released.
+    required: true
+  output-directory:
+    description: Directory for generated release assets.
+    required: false
+    default: dist
+
+outputs:
+  asset_path:
+    description: Path to the generated website ZIP.
+    value: ${{ steps.package.outputs.asset_path }}
+  asset_name:
+    description: Filename of the generated website ZIP.
+    value: ${{ steps.package.outputs.asset_name }}
+  lesson:
+    description: Lesson identifier from the validated manifest.
+    value: ${{ steps.package.outputs.lesson }}
+  academic_year:
+    description: Academic year from the validated manifest.
+    value: ${{ steps.package.outputs.academic_year }}
+
+runs:
+  using: composite
+  steps:
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: "3.3"
+
+    - name: Validate manifest and package public files
+      id: package
+      shell: bash
+      run: >-
+        ruby "$GITHUB_ACTION_PATH/package_website_release.rb"
+        "${{ inputs.manifest }}"
+        "${{ inputs.tag }}"
+        "${{ inputs.output-directory }}"

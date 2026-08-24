@@ -1,0 +1,39 @@
+name: Assemble lesson Pages
+description: Build immutable release routes and the current lesson alias.
+
+inputs:
+  bundles-directory:
+    description: Directory containing downloaded website ZIP assets.
+    required: false
+    default: bundles
+  output-directory:
+    description: Directory to upload as the GitHub Pages artifact.
+    required: false
+    default: lesson-site
+
+outputs:
+  current_tag:
+    description: Tag selected for the current alias.
+    value: ${{ steps.assemble.outputs.current_tag }}
+  lesson:
+    description: Lesson identifier selected for the current alias.
+    value: ${{ steps.assemble.outputs.lesson }}
+  academic_year:
+    description: Academic year selected for the current alias.
+    value: ${{ steps.assemble.outputs.academic_year }}
+
+runs:
+  using: composite
+  steps:
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: "3.3"
+
+    - name: Assemble versioned lesson site
+      id: assemble
+      shell: bash
+      run: >-
+        ruby "$GITHUB_ACTION_PATH/assemble_lesson_pages.rb"
+        "${{ inputs.bundles-directory }}"
+        "${{ inputs.output-directory }}"

@@ -1,0 +1,168 @@
+name: Release materials and publish lesson Pages
+
+on:
+  workflow_call:
+    secrets:
+      HUB_APP_ID:
+        required: false
+      HUB_APP_PRIVATE_KEY:
+        required: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    outputs:
+      lesson: ${{ steps.website.outputs.lesson }}
+      academic_year: ${{ steps.website.outputs.academic_year }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate tag format and detect Moodle mode
+        id: tag_meta
+        shell: bash
+        run: |
+          set -euo pipefail
+          TAG="${GITHUB_REF_NAME}"
+          REGEX='^L[0-9]{2}-v[0-9]+\.[0-9]+\.[0-9]+-[0-9]{8}(-moodle)?$'
+
+          if [[ ! "$TAG" =~ $REGEX ]]; then
+            echo "ERROR: Invalid tag format: $TAG"
+            echo "Expected: LWW-vMAJOR.MINOR.PATCH-YYYYMMDD[-moodle]"
+            exit 1
+          fi
+
+          if [[ "$TAG" =~ -moodle$ ]]; then
+            echo "moodle_mode=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "moodle_mode=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Package public website materials
+        id: website
+        uses: CUNI-NATUR-Biostatistics/CUNI-NATUR-Biostatistics.github.io/.github/actions/package-website-release@main
+        with:
+          tag: ${{ github.ref_name }}
+
+      - name: Create Moodle ZIP
+        id: moodle
+        if: steps.tag_meta.outputs.moodle_mode == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p dist/moodle
+          ruby -ryaml -rfileutils -e '
+            manifest = YAML.safe_load_file("website-release.yml", aliases: false)
+            resources = manifest.fetch("resources")
+            required = %w[learning presentation].flat_map do |group|
+              resources.fetch(group).values_at("html", "pdf")
+            end
+            required.each do |path|
+              abort("ERROR: Missing required file: #{path}") unless File.file?(path)
+              destination = File.join("dist", "moodle", path)
+              FileUtils.mkdir_p(File.dirname(destination))
+              FileUtils.cp(path, destination)
+            end
+          '
+          ZIP_NAME="materialy-${GITHUB_REF_NAME}.zip"
+          (cd dist/moodle && zip -q -r "../${ZIP_NAME}" .)
+          echo "asset_path=dist/${ZIP_NAME}" >> "$GITHUB_OUTPUT"
+
+      - name: Create release
+        if: steps.tag_meta.outputs.moodle_mode != 'true'
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ${{ steps.website.outputs.asset_path }}
+          fail_on_unmatched_files: true
+          generate_release_notes: true
+
+      - name: Create release with Moodle bundle
+        if: steps.tag_meta.outputs.moodle_mode == 'true'
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            ${{ steps.website.outputs.asset_path }}
+            ${{ steps.moodle.outputs.asset_path }}
+          fail_on_unmatched_files: true
+          generate_release_notes: true
+
+  pages:
+    needs: release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    outputs:
+      current_tag: ${{ steps.assemble.outputs.current_tag }}
+
+    steps:
+      - name: Download all website release bundles
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p bundles
+          gh api --paginate "repos/${GITHUB_REPOSITORY}/releases?per_page=100" \
+            --jq '.[] | .tag_name as $tag | .assets[] | select(.name | startswith("web-materials-")) | [$tag, .name] | @tsv' |
+          while IFS=$'\t' read -r tag asset; do
+            mkdir -p "bundles/${tag}"
+            gh release download "$tag" --pattern "$asset" --dir "bundles/${tag}"
+          done
+
+      - name: Assemble immutable routes and current alias
+        id: assemble
+        uses: CUNI-NATUR-Biostatistics/CUNI-NATUR-Biostatistics.github.io/.github/actions/assemble-lesson-pages@main
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: lesson-site
+
+      - name: Deploy lesson Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+  notify-hub:
+    needs: [release, pages]
+    runs-on: ubuntu-latest
+    permissions: {}
+    env:
+      HUB_APP_CONFIGURED: ${{ secrets.HUB_APP_ID != '' && secrets.HUB_APP_PRIVATE_KEY != '' }}
+
+    steps:
+      - name: Create hub installation token
+        id: app-token
+        if: env.HUB_APP_CONFIGURED == 'true'
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ secrets.HUB_APP_ID }}
+          private-key: ${{ secrets.HUB_APP_PRIVATE_KEY }}
+          owner: CUNI-NATUR-Biostatistics
+          repositories: CUNI-NATUR-Biostatistics.github.io
+
+      - name: Request immediate hub refresh
+        if: steps.app-token.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          LESSON: ${{ needs.release.outputs.lesson }}
+          ACADEMIC_YEAR: ${{ needs.release.outputs.academic_year }}
+          RELEASE_TAG: ${{ needs.pages.outputs.current_tag }}
+        shell: bash
+        run: |
+          gh api --method POST \
+            repos/CUNI-NATUR-Biostatistics/CUNI-NATUR-Biostatistics.github.io/dispatches \
+            -f event_type=lesson-released \
+            -F "client_payload[lesson]=${LESSON}" \
+            -F "client_payload[academic_year]=${ACADEMIC_YEAR}" \
+            -F "client_payload[tag]=${RELEASE_TAG}"
+
+      - name: Explain optional dispatch configuration
+        if: steps.app-token.outcome == 'skipped'
+        run: echo "Hub notification skipped because GitHub App secrets are not configured."
