@@ -113,7 +113,7 @@ jobs:
             --jq '.[] | .tag_name as $tag | .assets[] | select(.name | startswith("web-materials-")) | [$tag, .name] | @tsv' |
           while IFS=$'\t' read -r tag asset; do
             mkdir -p "bundles/${tag}"
-            gh release download "$tag" --pattern "$asset" --dir "bundles/${tag}"
+            gh release download "$tag" --repo "$GITHUB_REPOSITORY" --pattern "$asset" --dir "bundles/${tag}"
           done
 
       - name: Assemble immutable routes and current alias
