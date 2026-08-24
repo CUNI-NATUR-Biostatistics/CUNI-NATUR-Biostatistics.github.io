@@ -136,4 +136,5 @@ if (!all(has_signature)) {
   )
 }
 
+unlink(brand_stage, force = TRUE)
 cli::cli_inform(paste("Brand source:", brand_source))
