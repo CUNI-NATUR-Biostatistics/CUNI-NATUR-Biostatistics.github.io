@@ -1,0 +1,59 @@
+project:
+  type: website
+  output-dir: _site
+  render:
+    - index.qmd
+    - archiv.qmd
+    - o-kurzu.qmd
+    - zacnete.qmd
+    - rozvrh.qmd
+    - zdroje.qmd
+    - hodnoceni.qmd
+    - rok/*/index.qmd
+    - rok/*/*/index.qmd
+
+lang: cs
+
+website:
+  title: "Biostatistika"
+  description: "Studijní materiály ke kurzu Biostatistika MB120P163"
+  site-url: "https://cuni-natur-biostatistics.github.io"
+  search:
+    location: navbar
+    type: overlay
+  navbar:
+    left:
+      - href: index.qmd
+        text: Aktuální ročník
+      - href: archiv.qmd
+        text: Archiv
+      - href: o-kurzu.qmd
+        text: O kurzu
+      - href: zacnete.qmd
+        text: Začněte zde
+      - href: rozvrh.qmd
+        text: Rozvrh
+      - href: zdroje.qmd
+        text: Zdroje
+      - href: hodnoceni.qmd
+        text: Hodnocení
+    right:
+      - href: https://cuni-natur-biostatistics.github.io/slovnik/
+        text: Slovník
+  page-footer:
+    left: "Biostatistika MB120P163 · Přírodovědecká fakulta Univerzity Karlovy"
+    right: "Materiály jsou verzované podle akademických roků."
+
+format:
+  html:
+    theme:
+      - cosmo
+      - assets/brand/brand_theme.scss
+      - assets/styles.scss
+    include-in-header:
+      - assets/brand/fonts-include.html
+    toc: false
+    link-external-newwindow: true
+
+execute:
+  freeze: false

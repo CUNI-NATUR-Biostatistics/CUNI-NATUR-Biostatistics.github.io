@@ -1,0 +1,163 @@
+#----------------------------------------------------------#
+#
+#
+#               Biostatistics course hub
+#
+#                Render lesson card
+#
+#                    O. Mottl
+#                       2026
+#
+#----------------------------------------------------------#
+
+render_lesson_card <- function(lesson, year_slug, detail_href) {
+  status_label <- "P\u0159ipravujeme"
+  status_class <- "lesson-status lesson-status--preparing"
+  if (identical(lesson$status, "published")) {
+    status_label <- "Publikov\u00e1no"
+    status_class <- "lesson-status"
+  }
+  if (identical(lesson$status, "inherited")) {
+    status_label <-
+      paste0(
+        "P\u0159evzato z ",
+        gsub("-", "/", lesson$release_year)
+      )
+    status_class <- "lesson-status lesson-status--inherited"
+  }
+
+  top <-
+    paste0(
+      "<article class=\"lesson-card\">",
+      "<div class=\"lesson-card__topline\">",
+      "<span class=\"lesson-number\">",
+      escape_html(lesson$id),
+      "</span>",
+      "<span class=\"",
+      status_class,
+      "\">",
+      escape_html(status_label),
+      "</span>",
+      "</div>",
+      "<h3>",
+      escape_html(lesson$title),
+      "</h3>",
+      "<p class=\"lesson-card__subtitle\">",
+      escape_html(lesson$subtitle),
+      "</p>"
+    )
+
+  if (identical(lesson$status, "preparing")) {
+    return(
+      paste0(
+        top,
+        "<p class=\"lesson-empty\">",
+        paste0(
+          "Materi\u00e1ly zat\u00edm nemaj\u00ed schv\u00e1len\u00fd release ",
+          "pro studentsk\u00fd web."
+        ),
+        "</p>",
+        "</article>"
+      )
+    )
+  }
+
+  resources <- lesson$manifest$resources
+  learning_html <-
+    get_public_resource_url(
+      lesson = lesson,
+      resource = resources$learning$html
+    )
+  learning_pdf <-
+    get_public_resource_url(
+      lesson = lesson,
+      resource = resources$learning$pdf
+    )
+  presentation_pdf <-
+    get_public_resource_url(
+      lesson = lesson,
+      resource = resources$presentation$pdf
+    )
+  learning_source <-
+    get_source_blob_url(
+      lesson = lesson,
+      resource = resources$learning$source
+    )
+  presentation_source <-
+    get_source_blob_url(
+      lesson = lesson,
+      resource = resources$presentation$source
+    )
+  repository_url <-
+    paste0(
+      "https://github.com/",
+      lesson$manifest$repository,
+      "/tree/",
+      lesson$release
+    )
+
+  vec_primary <-
+    c(
+      render_resource_link(
+        label = "Skripta HTML",
+        href = learning_html,
+        primary = TRUE
+      ),
+      render_resource_link(
+        label = "Prezentace",
+        href = detail_href,
+        primary = TRUE,
+        external = FALSE
+      ),
+      render_resource_link(
+        label = "Skripta PDF",
+        href = learning_pdf
+      ),
+      render_resource_link(
+        label = "Prezentace PDF",
+        href = presentation_pdf
+      )
+    )
+  vec_sources <-
+    c(
+      render_resource_link(
+        label = "QMD skript",
+        href = learning_source
+      ),
+      render_resource_link(
+        label = "QMD prezentace",
+        href = presentation_source
+      ),
+      render_resource_link(
+        label = "Repozit\u00e1\u0159",
+        href = repository_url
+      )
+    )
+  vec_supplementary <-
+    render_supplementary_links(lesson = lesson)
+  meta <-
+    paste0(
+      escape_html(lesson$release),
+      " \u00b7 ",
+      escape_html(format_release_date(lesson$release)),
+      " \u00b7 ro\u010dn\u00edk ",
+      escape_html(gsub("-", "/", year_slug))
+    )
+
+  res_card <-
+    paste0(
+      top,
+      "<div class=\"resource-group\">",
+      paste(vec_primary, collapse = ""),
+      "</div>",
+      "<div class=\"resource-group\">",
+      paste(c(vec_sources, vec_supplementary), collapse = ""),
+      "</div>",
+      "<div class=\"lesson-card__meta\">",
+      meta,
+      "</div>",
+      "</article>"
+    )
+
+  return(res_card)
+}

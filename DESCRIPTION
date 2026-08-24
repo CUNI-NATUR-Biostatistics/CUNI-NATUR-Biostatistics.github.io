@@ -1,0 +1,14 @@
+Package: biostatisticscoursehub
+Type: Project
+Title: Biostatistics Course Hub
+Version: 0.0.1
+Authors@R: person("Ondřej", "Mottl", role = c("aut", "cre"))
+Description: Builds the public Quarto hub for MB120P163 release materials.
+License: MIT
+Encoding: UTF-8
+Imports:
+    cli,
+    htmltools,
+    jsonlite,
+    quarto,
+    yaml

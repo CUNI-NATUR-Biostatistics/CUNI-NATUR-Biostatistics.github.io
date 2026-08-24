@@ -1,0 +1,54 @@
+---
+title: "Učení a hodnocení"
+description: "Jak se připravovat a kde hledat závazné informace o hodnocení."
+---
+
+<div class="status-note">
+Tato stránka shrnuje schválený koncepční rámec. Přesné termíny, formáty,
+bodové hranice, povolené pomůcky a opravné možnosti jsou závazné až podle
+aktuálních pokynů v SIS a Moodle.
+</div>
+
+## Základní princip
+
+> Účast na výuce je dobrovolná; prokázání kompetencí je povinné.
+
+Přednášky a praktika poskytují výklad, podporu a zpětnou vazbu. Studijní texty
+a praktické R skripty ale mají umožnit samostatnou přípravu.
+
+## Co slouží k učení
+
+- týdenní studijní materiály a praktický R skript;
+- data a krátké praktické úlohy;
+- nehodnocené sebetesty s vysvětlením;
+- prezentace a otázky během výuky;
+- případný dobrovolný projekt nebo rozšiřující analýza.
+
+Domácí procvičování není hlavním důkazem individuální kompetence. Při učení a
+domácí práci může být AI pomocníkem; odpovědnost za porozumění výsledku zůstává
+na studentovi.
+
+## Co ověřuje kompetenci
+
+Koncepční rámec počítá se dvěma kontrolovanými událostmi:
+
+1. **praktický zápočet**, který ověřuje samostatné provedení a vysvětlení
+   základního analytického workflow v R;
+2. **závěrečná zkouška**, která ověřuje statistické uvažování, interpretaci,
+   diagnostiku a přenos do nové biologické situace.
+
+Při těchto událostech je používání internetu a AI podle schváleného rámce
+zakázáno. Přesné podmínky budou vždy zveřejněny před termínem v Moodle.
+
+## Jak se připravovat
+
+Nečekejte až na závěrečné opakování. Každý týden zkuste:
+
+1. vysvětlit biologickou otázku bez statistického žargonu;
+2. určit odezvu, prediktory a typy proměnných;
+3. provést dostupné kroky v R;
+4. interpretovat velikost efektu, nejistotu a omezení;
+5. popsat, co byste změnili v jiné situaci.
+
+Veřejný web obsahuje materiály a jejich verze. Odevzdání, sebetesty, výsledky
+a závazné organizační pokyny patří do Moodle nebo SIS.

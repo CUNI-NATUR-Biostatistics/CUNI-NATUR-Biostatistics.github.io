@@ -1,0 +1,63 @@
+---
+title: "Začněte zde"
+description: "Praktický průvodce kurzem Biostatistika."
+---
+
+Kurz je postavený kolem jedné opakující se otázky: jak z biologického problému
+dojít k přiměřenému, interpretovatelnému a reprodukovatelnému závěru?
+
+## Doporučený postup
+
+<div class="info-grid">
+<div class="info-card">
+
+### 1. Přečtěte si skripta
+
+Skripta jsou hlavním studijním zdrojem. Začněte otázkou a výsledky učení,
+potom projděte vysvětlení, příklady a shrnutí.
+
+</div>
+<div class="info-card">
+
+### 2. Projděte praktický skript
+
+Otevřete R skript a data, spusťte jednotlivé kroky a zapisujte si vlastní
+interpretaci. Praktikum můžete absolvovat ve skupině nebo samostatně.
+
+</div>
+<div class="info-card">
+
+### 3. Ověřte porozumění
+
+Použijte sebetest, vraťte se ke grafům a zkuste celý postup vysvětlit vlastními
+slovy. Prezentace slouží hlavně k výkladu, otázkám a diskusi.
+
+</div>
+</div>
+
+## Jak pracovat s jedním týdnem
+
+Každý týden má stejný základní rytmus:
+
+1. Projděte tři až pět konkrétních výsledků učení.
+2. Přečtěte si HTML skripta nebo si stáhněte PDF.
+3. Proveďte praktický R skript s příslušnými daty.
+4. Zkuste nehodnocený sebetest a přečtěte si vysvětlení odpovědí.
+5. Použijte prezentaci jako druhý výkladový pohled a přípravu na výuku.
+
+## Co byste měli po kurzu umět
+
+- Převést biologickou nebo ekologickou otázku na odezvu, prediktory a model.
+- Načíst, zkontrolovat, vizualizovat a popsat data v R.
+- Fitovat základní lineární model a interpretovat jeho parametry.
+- Vyjádřit velikost efektu společně s jeho nejistotou.
+- Odhalit základní diagnostické problémy a navrhnout další krok.
+- Napsat věcný, opatrný a reprodukovatelný biologický závěr.
+
+Podrobnější výsledky učení jsou na stránce [O kurzu](o-kurzu.html).
+
+## Kde najdete aktuální informace
+
+Veřejný web poskytuje studijní materiály a jejich historické verze. Moodle a
+SIS zůstávají místem pro aktuální organizační informace, sebetesty, odevzdání
+a závazné termíny.

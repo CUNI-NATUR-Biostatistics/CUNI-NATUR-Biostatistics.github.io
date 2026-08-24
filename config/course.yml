@@ -1,0 +1,35 @@
+schema_version: 1
+course_code: MB120P163
+course_title: Biostatistika
+organization: CUNI-NATUR-Biostatistics
+pages_base_url: https://cuni-natur-biostatistics.github.io
+current_year: "2026-27"
+years:
+  - slug: "2026-27"
+    label: "2026/27"
+    offering: offerings/2026-27.yml
+lessons:
+  - id: L01
+    title: "Typy dat a popis jedné proměnné"
+  - id: L02
+    title: "Vztahy dvou proměnných a vizualizace"
+  - id: L03
+    title: "Lineární model s jedním numerickým prediktorem"
+  - id: L04
+    title: "Od odhadu k nejistotě"
+  - id: L05
+    title: "Od velikosti efektu k testování hypotéz"
+  - id: L06
+    title: "Kategoriální prediktory: od dvou skupin k ANOVA"
+  - id: L07
+    title: "Více prediktorů: aditivní model a korelace prediktorů"
+  - id: L08
+    title: "Interakce prediktorů"
+  - id: L09
+    title: "Porovnání kandidátních modelů: R², adjustované R² a AIC"
+  - id: L10
+    title: "Nelinearita a transformace"
+  - id: L11
+    title: "Hierarchická data: proč jednoduchý lm někdy nestačí"
+  - id: L12
+    title: "GLM: binární a početní odezva"
