@@ -104,7 +104,7 @@ build_catalog <- function(config) {
           material_base_url = get_material_base_url(
             base_url = config$pages_base_url,
             lesson_id = lesson_id,
-            release_tag = manifest$tag
+            release_tag = release_tag
           ),
           manifest = manifest
         )
