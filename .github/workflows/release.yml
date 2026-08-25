@@ -91,6 +91,9 @@ jobs:
   pages:
     needs: release
     runs-on: ubuntu-latest
+    concurrency:
+      group: ${{ github.repository }}-lesson-pages
+      cancel-in-progress: false
     permissions:
       contents: read
       pages: write
@@ -102,6 +105,11 @@ jobs:
       current_tag: ${{ steps.assemble.outputs.current_tag }}
 
     steps:
+      - name: Check out preview source from main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
       - name: Download all website release bundles
         env:
           GH_TOKEN: ${{ github.token }}
@@ -119,6 +127,11 @@ jobs:
       - name: Assemble immutable routes and current alias
         id: assemble
         uses: CUNI-NATUR-Biostatistics/CUNI-NATUR-Biostatistics.github.io/.github/actions/assemble-lesson-pages@main
+        with:
+          require-releases: "true"
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v4

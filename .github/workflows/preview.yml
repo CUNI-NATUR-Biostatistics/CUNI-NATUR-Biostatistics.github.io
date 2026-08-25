@@ -1,0 +1,56 @@
+name: Publish lesson preview
+
+on:
+  workflow_call:
+
+jobs:
+  pages:
+    runs-on: ubuntu-latest
+    concurrency:
+      group: ${{ github.repository }}-lesson-pages
+      cancel-in-progress: false
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Check out preview source from main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Download available website release bundles
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p bundles
+          gh api --paginate "repos/${GITHUB_REPOSITORY}/releases?per_page=100" \
+            --jq '.[] | .tag_name as $tag | .assets[] | select(.name | startswith("web-materials-")) | [$tag, .name] | @tsv' |
+          while IFS=$'\t' read -r tag asset; do
+            mkdir -p "bundles/${tag}"
+            gh release download "$tag" --repo "$GITHUB_REPOSITORY" --pattern "$asset" --dir "bundles/${tag}"
+          done
+
+      - name: Assemble stable routes and preview
+        id: assemble
+        uses: CUNI-NATUR-Biostatistics/CUNI-NATUR-Biostatistics.github.io/.github/actions/assemble-lesson-pages@main
+        with:
+          require-releases: "false"
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: lesson-site
+
+      - name: Deploy lesson Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,42 @@
+name: Validate release automation
+
+on:
+  pull_request:
+    paths:
+      - ".github/actions/**"
+      - ".github/workflows/release.yml"
+      - ".github/workflows/preview.yml"
+      - ".github/workflows/validate-release-automation.yml"
+      - "tests/release_automation/**"
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/actions/**"
+      - ".github/workflows/release.yml"
+      - ".github/workflows/preview.yml"
+      - ".github/workflows/validate-release-automation.yml"
+      - "tests/release_automation/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3"
+
+      - name: Check Ruby syntax
+        run: |
+          ruby -c .github/actions/package-website-release/package_website_release.rb
+          ruby -c .github/actions/assemble-lesson-pages/assemble_lesson_pages.rb
+
+      - name: Run release automation fixtures
+        run: ruby tests/release_automation/assemble_lesson_pages_test.rb

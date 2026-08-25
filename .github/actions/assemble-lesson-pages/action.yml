@@ -1,5 +1,5 @@
 name: Assemble lesson Pages
-description: Build immutable release routes and the current lesson alias.
+description: Build immutable releases, the stable current alias, and a preview from main.
 
 inputs:
   bundles-directory:
@@ -10,6 +10,14 @@ inputs:
     description: Directory to upload as the GitHub Pages artifact.
     required: false
     default: lesson-site
+  preview-manifest:
+    description: Path to the lesson manifest used to assemble preview HTML.
+    required: false
+    default: website-release.yml
+  require-releases:
+    description: Fail when no immutable release bundle is available.
+    required: false
+    default: "false"
 
 outputs:
   current_tag:
@@ -37,3 +45,5 @@ runs:
         ruby "$GITHUB_ACTION_PATH/assemble_lesson_pages.rb"
         "${{ inputs.bundles-directory }}"
         "${{ inputs.output-directory }}"
+        "${{ inputs.preview-manifest }}"
+        "${{ inputs.require-releases }}"
