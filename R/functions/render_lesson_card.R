@@ -104,11 +104,16 @@ render_lesson_card <- function(
       resource = resources$presentation$source,
       channel = channel
     )
+  repository_ref <- "main"
+  if (identical(channel, "archive")) {
+    repository_ref <- lesson$release
+  }
   repository_url <-
     paste0(
       "https://github.com/",
       lesson$manifest$repository,
-      "/tree/main"
+      "/tree/",
+      repository_ref
     )
 
   vec_primary <-
