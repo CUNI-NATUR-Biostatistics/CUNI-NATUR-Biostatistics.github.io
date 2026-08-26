@@ -23,21 +23,12 @@ write_site_sources <- function(catalog, output_directory = "_generated") {
   for (
     lesson in current_year$lessons
     ) {
-    detail_href <-
-      paste0(
-        "rok/",
-        current_year$slug,
-        "/",
-        lesson$id,
-        "/"
-      )
     vec_current_cards <-
       c(
         vec_current_cards,
         render_lesson_card(
           lesson = lesson,
-          year_slug = current_year$slug,
-          detail_href = detail_href
+          year_slug = current_year$slug
         )
       )
   }
@@ -94,8 +85,7 @@ write_site_sources <- function(catalog, output_directory = "_generated") {
           vec_year_cards,
           render_lesson_card(
             lesson = lesson,
-            year_slug = year$slug,
-            detail_href = paste0(lesson$id, "/")
+            year_slug = year$slug
           )
         )
     }

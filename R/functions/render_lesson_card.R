@@ -10,7 +10,7 @@
 #
 #----------------------------------------------------------#
 
-render_lesson_card <- function(lesson, year_slug, detail_href) {
+render_lesson_card <- function(lesson, year_slug) {
   status_label <- "P\u0159ipravujeme"
   status_class <- "lesson-status lesson-status--preparing"
   if (identical(lesson$status, "published")) {
@@ -73,6 +73,11 @@ render_lesson_card <- function(lesson, year_slug, detail_href) {
       lesson = lesson,
       resource = resources$learning$pdf
     )
+  presentation_html <-
+    get_public_resource_url(
+      lesson = lesson,
+      resource = resources$presentation$html
+    )
   presentation_pdf <-
     get_public_resource_url(
       lesson = lesson,
@@ -105,9 +110,8 @@ render_lesson_card <- function(lesson, year_slug, detail_href) {
       ),
       render_resource_link(
         label = "Prezentace",
-        href = detail_href,
-        primary = TRUE,
-        external = FALSE
+        href = presentation_html,
+        primary = TRUE
       ),
       render_resource_link(
         label = "Skripta PDF",
