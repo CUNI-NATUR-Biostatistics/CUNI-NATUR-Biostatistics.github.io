@@ -57,9 +57,31 @@ if (is.null(year_config)) {
 }
 
 offering <-
-  yaml::read_yaml(file = year_config$offering)
+  read_utf8_yaml(path = year_config$offering)
+required_content <- c("schedule", "assessment", "team")
+if (
+  is.null(offering$content) ||
+    !all(required_content %in% names(offering$content))
+) {
+  cli::cli_abort("Cannot freeze: semester snapshot content is incomplete.")
+}
+
+content_hashes <- list()
+for (
+  content_name in required_content
+  ) {
+  content_path <- offering$content[[content_name]]
+  if (!file.exists(content_path)) {
+    cli::cli_abort(
+      "Cannot freeze: semester content {.path {content_path}} is missing."
+    )
+  }
+  content_hashes[[content_name]] <-
+    unname(tools::md5sum(content_path))
+}
 offering$frozen <- TRUE
 offering$releases <- list_releases
+offering$content_hashes <- content_hashes
 
 connection <-
   file(

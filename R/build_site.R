@@ -23,7 +23,15 @@ source("R/functions/format_release_date.R")
 source("R/functions/render_supplementary_links.R")
 source("R/functions/render_lesson_card.R")
 source("R/functions/render_lesson_page.R")
-source("R/functions/write_site_sources.R")
+source("R/functions/read_semester_fragment.R")
+source(
+  "R/functions/render_redirect_page.R",
+  encoding = "UTF-8"
+)
+source(
+  "R/functions/write_site_sources.R",
+  encoding = "UTF-8"
+)
 
 config <-
   read_course_config()
@@ -32,12 +40,18 @@ catalog <-
 
 write_site_sources(catalog = catalog)
 
-unlink("rok", recursive = TRUE, force = TRUE)
-moved <-
-  file.rename(
-    from = file.path("_generated", "rok"),
-    to = "rok"
-  )
-if (!isTRUE(moved)) {
-  cli::cli_abort("Could not move generated academic-year sources into rok/.")
+for (
+  generated_directory in c("semestry", "rok")
+  ) {
+  unlink(generated_directory, recursive = TRUE, force = TRUE)
+  moved <-
+    file.rename(
+      from = file.path("_generated", generated_directory),
+      to = generated_directory
+    )
+  if (!isTRUE(moved)) {
+    cli::cli_abort(
+      "Could not move generated sources into {.path {generated_directory}/}."
+    )
+  }
 }

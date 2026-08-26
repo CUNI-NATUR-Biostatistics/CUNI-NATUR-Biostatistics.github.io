@@ -1,20 +1,70 @@
 ---
-title: "Biostatistika"
-subtitle: "Studijní materiály ke kurzu MB120P163"
+title: "Biostatistika a plánování ekologických pokusů"
+subtitle: "Od biologické otázky k transparentnímu statistickému závěru"
+description: "Veřejný průvodce kurzem Biostatistika a plánování ekologických pokusů (MB120P163) na Přírodovědecké fakultě Univerzity Karlovy."
 page-layout: full
 ---
 
-::: {.course-intro}
-Na jednom místě najdete podkladová skripta, prezentace, R skripty, vybraná data a zdrojové soubory ke všem lekcím. Materiály označené jako publikované odpovídají schválenému release dané lekce.
-:::
+<section class="course-hero">
+<div class="course-hero__content">
+<p class="eyebrow">MB120P163 · Přírodovědecká fakulta UK</p>
+<h2>Biostatistika a plánování ekologických pokusů</h2>
+<p class="course-hero__lead">Kurz staví statistiku kolem modelů, biologických otázek a interpretace. Nejde jen o to získat výsledek v R, ale rozumět, co výsledek znamená, na čem stojí a jak jej reprodukovat.</p>
+<div class="hero-actions">
+<a class="resource-link resource-link--primary" href="materialy.html">Materiály aktuálního semestru</a>
+<a class="resource-link" href="rozvrh.html">Rozvrh 2026/27</a>
+</div>
+</div>
+<dl class="course-facts" aria-label="Základní informace o kurzu">
+<div><dt><i class="bi bi-book" aria-hidden="true"></i>Kód</dt><dd>MB120P163</dd></div>
+<div><dt><i class="bi bi-calendar3" aria-hidden="true"></i>Semestr</dt><dd>Zimní 2026/27</dd></div>
+<div><dt><i class="bi bi-award" aria-hidden="true"></i>Rozsah</dt><dd>2/2, 5 kreditů</dd></div>
+<div><dt><i class="bi bi-translate" aria-hidden="true"></i>Jazyk</dt><dd>Čeština</dd></div>
+<div><dt><i class="bi bi-building" aria-hidden="true"></i>Instituce</dt><dd>Přírodovědecká fakulta UK</dd></div>
+</dl>
+</section>
 
-{{< include _generated/current-intro.md >}}
+## Pro koho kurz je
 
-<div class="quick-links">
-<a class="resource-link resource-link--primary" href="zacnete.html">Začněte zde</a>
-<a class="resource-link" href="rozvrh.html">Rozvrh a návaznost</a>
-<a class="resource-link" href="zdroje.html">R a další zdroje</a>
-<a class="resource-link" href="hodnoceni.html">Učení a hodnocení</a>
+Kurz je určen především studentům biologických a ekologických oborů, kteří chtějí samostatně pracovat s daty a kriticky číst výsledky analýz. Předchozí zkušenost se statistikou ani s R není nutná. Pomůže ochota pravidelně pracovat s daty, grafy a krátkými R skripty; pro úplné začátečníky je připravena volitelná orientace L00.
+
+## Jak se v kurzu učíme
+
+<div class="principle-grid">
+<article class="principle-card"><span>01</span><h3>Začínáme otázkou</h3><p>Nejprve formulujeme biologický problém, teprve potom volíme proměnné, graf a model.</p></article>
+<article class="principle-card"><span>02</span><h3>Model je pracovní nástroj</h3><p>Od prvních lekcí propojujeme popis dat, odhad efektu, nejistotu, diagnostiku a porovnání modelů.</p></article>
+<article class="principle-card"><span>03</span><h3>Interpretace je součást analýzy</h3><p>Výsledek nestačí vypočítat. Musíme jej vysvětlit v biologickém kontextu a pojmenovat jeho omezení.</p></article>
+<article class="principle-card"><span>04</span><h3>Postup musí být reprodukovatelný</h3><p>Pracujeme v R, uchováváme kód a propojujeme data, analýzu, grafy a závěr.</p></article>
 </div>
 
-{{< include _generated/current-grid.md >}}
+## Výuka a výsledky učení
+
+Kurz tvoří týdenní devadesátiminutová přednáška a navazující praktikum v jedné z pěti skupin. Přednáška vytváří koncepční mapu; praktikum vede k samostatnému provedení stejného analytického workflow na datech.
+
+Po absolvování kurzu dokážete:
+
+::: {.learning-outcomes}
+- rozlišit typy proměnných a zvolit odpovídající popis a graf;
+- převést biologickou nebo ekologickou otázku na model s určenou odezvou a prediktory;
+- použít lineární model jako základní nástroj analýzy;
+- interpretovat parametry lineárního modelu a zhodnotit sílu vztahu pomocí R²;
+- interpretovat odhad efektu včetně nejistoty vyjádřené intervalem spolehlivosti;
+- interpretovat p-hodnotu;
+- pracovat s více prediktory a popsat důsledky jejich korelace;
+- rozpoznat a interpretovat interakci prediktorů;
+- porovnat kandidátní modely pomocí AIC a obhájit volbu finálního modelu;
+- zachytit nelinearitu a zvolit jednoduché řešení pomocí transformace nebo vhodné funkce;
+- rozpoznat hierarchii v datech, například opakovaná měření, lokality nebo bloky, a určit, kdy je potřeba rozšíření modelu;
+- zvolit vhodný model pro kategoriální odezvu a zdůvodnit, proč lineární model nestačí pro binární data;
+- sestavit základní workflow analýzy v R: načtení dat → vizualizace → model → diagnostika → interpretace.
+:::
+
+## Kde hledat informace
+
+<div class="system-grid">
+<article class="system-card system-card--primary"><p class="eyebrow">Hlavní zdroj</p><div class="system-card__title"><i class="bi bi-compass" aria-hidden="true"></i><h3><a href="/materialy.html">HUB</a></h3></div><p>Aktuální popis kurzu, rozvrh, pravidla hodnocení, veřejné studijní materiály a archiv semestrů.</p></article>
+<article class="system-card"><p class="eyebrow">Oficiální evidence</p><div class="system-card__title"><i class="bi bi-building" aria-hidden="true"></i><h3><a href="https://is.cuni.cz/studium/predmety/index.php?do=predmet&amp;kod=MB120P163">SIS</a></h3></div><p>Zápis do předmětu a skupin, termíny zkoušek a formální studijní záznamy.</p></article>
+<article class="system-card"><p class="eyebrow">Soukromá výuka</p><div class="system-card__title"><i class="bi bi-shield-lock" aria-hidden="true"></i><h3><a href="https://dl2.cuni.cz/course/view.php?id=106">Moodle</a></h3></div><p>Testy, zadání, odevzdávání, výsledky a oznámení určená pouze zapsaným studentům.</p></article>
+</div>
+
+<div class="status-note">Tento web je veřejný. Neobsahuje osobní studijní údaje, individuální výsledky ani neveřejná zadání.</div>

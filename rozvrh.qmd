@@ -1,39 +1,6 @@
 ---
-title: "Rozvrh a návaznost lekcí"
-description: "Orientační pořadí témat a studijní rytmus kurzu."
+title: "Rozvrh"
+description: "Předběžný rozvrh zimního semestru 2026/27."
 ---
 
-Pořadí níže je aktuální plán kurzu. Konkrétní data, místnosti a organizační
-změny zveřejňuje Moodle nebo SIS.
-
-| Lekce | Téma | Hlavní otázka |
-|---|---|---|
-| L00 | Základy R *(volitelné)* | Jak spustit RStudio, projekt a skript? |
-| L01 | Typy dat a popis jedné proměnné | Jak data popsat, aby z popisu plynula otázka? |
-| L02 | Vztahy dvou proměnných a vizualizace | Co vidíme v grafu a co z něj ještě neplyne? |
-| L03 | Lineární model s jedním numerickým prediktorem | Jak vyjádřit vztah jako model? |
-| L04 | Od odhadu k nejistotě | Jak přesný je odhad z jednoho výběru? |
-| L05 | Od velikosti efektu k testování hypotéz | Jak hodnotit konkrétní tvrzení o efektu? |
-| L06 | Kategoriální prediktory a ANOVA | Jak modelovat rozdíly mezi skupinami? |
-| L07 | Více prediktorů a jejich korelace | Co se mění, když do modelu přidáme další prediktor? |
-| L08 | Interakce prediktorů | Kdy se efekt jednoho prediktoru mění podle druhého? |
-| L09 | Porovnání kandidátních modelů a AIC | Jak zdůvodnit volbu modelu? |
-| L10 | Nelinearita a transformace | Co dělat, když přímka nepopisuje vztah rozumně? |
-| L11 | Hierarchická data | Kdy jednoduchý `lm()` nestačí? |
-| L12 | GLM pro binární a početní odezvu | Jak volba odezvy mění model? |
-
-## Opakující se analytické workflow
-
-Každé praktikum znovu prochází v rozsahu známých metod celým postupem:
-
-1. biologická otázka;
-2. kontrola dat;
-3. relevantní vizualizace;
-4. formulace a fit modelu;
-5. diagnostika a nejistota;
-6. biologická interpretace a reprodukovatelné shrnutí.
-
-<div class="status-note">
-Pořadí lekcí může být organizačně upraveno. Historické akademické roky najdete
-v <a href="archiv.html">archivu</a>; jejich odkazy zůstávají neměnné.
-</div>
+{{< include _generated/current-rozvrh.md >}}

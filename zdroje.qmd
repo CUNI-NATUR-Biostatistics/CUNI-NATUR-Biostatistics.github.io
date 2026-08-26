@@ -1,45 +1,8 @@
 ---
-title: "Zdroje a technický start"
-description: "Nástroje a odkazy pro samostatnou práci v kurzu."
+title: "Jak pracovat s materiály"
+description: "Přesměrování na průvodce studijními materiály."
 ---
 
-## R a RStudio
+<script>window.location.replace("jak-pracovat-s-materialy.html");</script>
 
-Pro praktickou práci budete potřebovat:
-
-- [R](https://cran.r-project.org/), vlastní statistický výpočetní systém;
-- [RStudio Desktop](https://posit.co/download/rstudio-desktop/), prostředí
-  pro práci s R, projekty a skripty.
-
-Začněte volitelnou lekcí L00, pokud jste s R nebo RStudio ještě nepracovali.
-Balíčky a jejich verze se mohou mezi lekcemi lišit; řiďte se vždy pokyny
-konkrétního R skriptu.
-
-## Slovník
-
-Při prvním výskytu pojmu ve skriptech a dalších materiálech hledejte jeho
-vysvětlení ve [slovníku Biostatistiky](https://cuni-natur-biostatistics.github.io/slovnik/).
-
-## Jak číst jednotlivé materiály
-
-| Materiál | K čemu slouží |
-|---|---|
-| Skripta HTML | Hlavní studijní text, který lze prohledávat a číst online. |
-| Skripta PDF | Offline čtení nebo tisk. |
-| Prezentace HTML | Výklad, otázky, aktivní práce a vizuální shrnutí. |
-| Prezentace PDF | Offline nebo tisková verze prezentace. |
-| R skript | Praktické provedení analytického workflow. |
-| Data | Veřejné datové soubory použité v konkrétní lekci. |
-| QMD zdroj | Průhlednost: jak byl výstup vytvořen. |
-
-## Když se něco nedaří
-
-Nejprve zkontrolujte pracovní adresář projektu, názvy souborů a chybovou
-hlášku. Potom porovnejte svůj skript s posledním veřejným release dané lekce.
-Organizační a aktuální technické pokyny hledejte v Moodle.
-
-## Další literatura
-
-Doplňující knihy, články a odkazy budou přidávány podle konkrétních lekcí.
-Odkazy uvedené přímo ve skriptech mají přednost před obecným seznamem na této
-stránce.
+Pokračujte na stránku [Jak pracovat s materiály](jak-pracovat-s-materialy.html).

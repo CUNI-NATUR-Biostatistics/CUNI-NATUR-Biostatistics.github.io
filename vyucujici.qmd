@@ -1,0 +1,7 @@
+---
+title: "Vyučující"
+description: "Koordinátor a vyučující kurzu Biostatistika."
+page-layout: full
+---
+
+{{< include _generated/current-vyucujici.md >}}

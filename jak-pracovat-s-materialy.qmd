@@ -1,0 +1,43 @@
+---
+title: "Jak pracovat s materiály"
+description: "Studijní rytmus, technický start a vysvětlení jednotlivých zdrojů kurzu."
+---
+
+## Doporučený týdenní rytmus
+
+1. Před výukou si přečtěte výsledky učení a rychle projděte HTML skripta.
+2. Na přednášce pracujte s biologickou otázkou, grafy a interpretací; prezentace není náhradou skript.
+3. Na praktiku spusťte R skript po jednotlivých krocích a každý důležitý výsledek vysvětlete vlastními slovy.
+4. Po výuce zopakujte celé workflow bez slepého kopírování a poznamenejte si, čemu ještě nerozumíte.
+5. Nejasnosti řešte včas na praktiku, konzultaci nebo v komunikačním kanálu uvedeném v Moodle.
+
+## Co znamenají odkazy u lekce
+
+| Odkaz | K čemu slouží |
+|---|---|
+| Skripta HTML | Hlavní, prohledávatelný studijní text pro čtení online. |
+| Skripta PDF | Stejný obsah pro offline čtení nebo tisk. |
+| Prezentace HTML | Interaktivní slidy používané při výuce. |
+| Prezentace PDF | Neinteraktivní verze slidů pro offline použití. |
+| R skript | Praktické provedení analýzy; spouštějte jej po jednotlivých krocích. |
+| Data | Datové soubory potřebné pro danou lekci. |
+| QMD zdroj | Zdroj Quarto dokumentu ukazující, jak vznikl text nebo prezentace. |
+| Repozitář | Aktuální pracovní obsah lekce na GitHubu; může být napřed oproti schválené verzi. |
+
+## R a RStudio
+
+Nainstalujte [R](https://cran.r-project.org/) a [RStudio Desktop](https://posit.co/download/rstudio-desktop/). Pro každou lekci otevřete její projekt a řiďte se pokyny v R skriptu. Pokud s R nebo RStudio začínáte, využijte volitelnou orientaci L00. Balíčky se mohou mezi lekcemi lišit; neinstalujte náhodně nové verze uprostřed rozpracované analýzy.
+
+## Stabilní a archivované verze
+
+Stránka **Materiály** odkazuje na poslední schválenou verzi každé lekce (<code>current</code>). Když vyučující připravuje opravu, pracovní náhled se může změnit, ale stabilní odkaz zůstává stejný až do vydání nové verze. **Archiv** naproti tomu používá konkrétní označené verze; uzavřený semestr se už nemění.
+
+## Když se něco nedaří
+
+- Zkontrolujte, že jste otevřeli správný RStudio projekt a že soubory nepřesouváte mimo jeho složku.
+- Spusťte skript od začátku a přečtěte první chybovou hlášku, ne pouze poslední následek.
+- Porovnejte svůj soubor se stabilní verzí na stránce Materiály.
+- U dotazu uveďte lekci, krok, přesnou hlášku a co jste již vyzkoušeli; neposílejte pouze snímek obrazovky bez kontextu.
+- Organizační dotazy a neveřejné informace směřujte podle pokynů v Moodle, obsahové dotazy můžete přinést na praktikum nebo konzultaci.
+
+Neznámé pojmy hledejte také ve [Slovníku pojmů](https://cuni-natur-biostatistics.github.io/slovnik/).

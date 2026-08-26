@@ -1,20 +1,8 @@
 ---
-title: "O kurzu"
+title: "Biostatistika"
+description: "Přesměrování na hlavní stránku kurzu."
 ---
 
-Kurz **Biostatistika (MB120P163)** je určen studentům biologie a ekologie s malou nebo žádnou předchozí zkušeností se statistikou a programováním v R. Cílem je naučit se samostatně plánovat analýzu biologických dat, provést ji v R a věcně interpretovat výsledky.
+<script>window.location.replace("index.html");</script>
 
-## Jak materiály používat
-
-- **Skripta HTML** jsou určena pro běžné studium v prohlížeči; PDF lze stáhnout pro čtení offline nebo tisk.
-- **Prezentaci** lze procházet přímo na stránce lekce nebo otevřít přes celou obrazovku; k dispozici je také PDF.
-- **R skript ke cvičení** obsahuje studentský pracovní soubor. Vybraná data a další veřejné přílohy jsou uvedeny pouze tam, kde je lekce skutečně používá.
-- **Zdroj QMD** ukazuje, jak byl materiál vytvořen. Konkrétní historická verze je vždy připnuta k release tagu.
-
-## Verze a akademické roky
-
-Aktuální ročník se aktualizuje pouze po schváleném release lekce. Po uzavření akademického roku vznikne neměnný snapshot použitých release tagů. Pokud nový ročník dočasně používá starší verzi lekce, web tuto skutečnost výslovně označí.
-
-## Kontakt
-
-Kurz zajišťuje Přírodovědecká fakulta Univerzity Karlovy. Organizační informace a komunikace se studenty probíhají prostřednictvím SIS a Moodle.
+Informace o kurzu jsou nyní na [hlavní stránce](index.html).

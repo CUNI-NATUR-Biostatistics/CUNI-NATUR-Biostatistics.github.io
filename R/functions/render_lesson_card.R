@@ -121,35 +121,42 @@ render_lesson_card <- function(
       render_resource_link(
         label = "Skripta HTML",
         href = learning_html,
-        primary = TRUE
+        primary = TRUE,
+        icon = "book"
       ),
       render_resource_link(
         label = "Prezentace",
         href = presentation_html,
-        primary = TRUE
+        primary = TRUE,
+        icon = "easel"
       ),
       render_resource_link(
         label = "Skripta PDF",
-        href = learning_pdf
+        href = learning_pdf,
+        icon = "file-earmark-pdf"
       ),
       render_resource_link(
         label = "Prezentace PDF",
-        href = presentation_pdf
+        href = presentation_pdf,
+        icon = "file-earmark-pdf"
       )
     )
   vec_sources <-
     c(
       render_resource_link(
         label = "QMD skript",
-        href = learning_source
+        href = learning_source,
+        icon = "file-earmark-code"
       ),
       render_resource_link(
         label = "QMD prezentace",
-        href = presentation_source
+        href = presentation_source,
+        icon = "file-earmark-code"
       ),
       render_resource_link(
         label = "Repozit\u00e1\u0159",
-        href = repository_url
+        href = repository_url,
+        icon = "github"
       )
     )
   vec_supplementary <-
@@ -162,7 +169,7 @@ render_lesson_card <- function(
       escape_html(lesson$release),
       " \u00b7 ",
       escape_html(format_release_date(lesson$release)),
-      " \u00b7 ro\u010dn\u00edk ",
+      " \u00b7 semestr ",
       escape_html(gsub("-", "/", year_slug))
     )
 

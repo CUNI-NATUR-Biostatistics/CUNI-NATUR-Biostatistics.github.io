@@ -16,6 +16,8 @@ make_placeholder_catalog <- function(config) {
   for (
     year_config in config$years
     ) {
+    offering <-
+      read_utf8_yaml(path = year_config$offering)
     list_lessons <- list()
     for (
       lesson_config in config$lessons
@@ -38,7 +40,11 @@ make_placeholder_catalog <- function(config) {
       list(
         slug = year_config$slug,
         label = year_config$label,
-        frozen = FALSE,
+        semester_label = offering$semester_label,
+        semester_status = offering$semester_status,
+        frozen = isTRUE(offering$frozen),
+        content = offering$content,
+        content_hashes = offering$content_hashes,
         lessons = list_lessons
       )
   }

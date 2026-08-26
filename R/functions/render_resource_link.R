@@ -14,7 +14,8 @@ render_resource_link <- function(label,
                                  href,
                                  primary = FALSE,
                                  external = TRUE,
-                                 download = FALSE) {
+                                 download = FALSE,
+                                 icon = NULL) {
   class_name <- "resource-link"
   if (isTRUE(primary)) {
     class_name <-
@@ -39,11 +40,22 @@ render_resource_link <- function(label,
       c(vec_attributes, "download")
   }
 
+  icon_html <- ""
+  if (!is.null(icon)) {
+    icon_html <-
+      paste0(
+        "<i class=\"bi bi-",
+        escape_html(icon),
+        "\" aria-hidden=\"true\"></i>"
+      )
+  }
+
   res_link <-
     paste0(
       "<a ",
       paste(vec_attributes, collapse = " "),
       ">",
+      icon_html,
       escape_html(label),
       "</a>"
     )

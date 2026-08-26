@@ -19,9 +19,9 @@ render_supplementary_links <- function(
 
   list_groups <-
     list(
-      exercises = "R",
-      data = "Data",
-      extras = "P\u0159\u00edloha"
+      exercises = list(label = "R", icon = "terminal"),
+      data = list(label = "Data", icon = "database"),
+      extras = list(label = "P\u0159\u00edloha", icon = "paperclip")
     )
 
   for (
@@ -37,7 +37,7 @@ render_supplementary_links <- function(
       ) {
       label <-
         paste0(
-          list_groups[[group_name]],
+          list_groups[[group_name]]$label,
           ": ",
           entry$label
         )
@@ -51,7 +51,8 @@ render_supplementary_links <- function(
               resource = entry,
               channel = channel
             ),
-            download = TRUE
+            download = TRUE,
+            icon = list_groups[[group_name]]$icon
           )
         )
     }

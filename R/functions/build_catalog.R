@@ -17,10 +17,7 @@ build_catalog <- function(config) {
     year_config in config$years
     ) {
     offering <-
-      yaml::read_yaml(
-        file = year_config$offering,
-        fileEncoding = "UTF-8"
-      )
+      read_utf8_yaml(path = year_config$offering)
 
     if (!identical(offering$academic_year, year_config$slug)) {
       cli::cli_abort(
@@ -120,7 +117,11 @@ build_catalog <- function(config) {
       list(
         slug = year_config$slug,
         label = year_config$label,
+        semester_label = offering$semester_label,
+        semester_status = offering$semester_status,
         frozen = isTRUE(offering$frozen),
+        content = offering$content,
+        content_hashes = offering$content_hashes,
         lessons = list_lessons
       )
   }

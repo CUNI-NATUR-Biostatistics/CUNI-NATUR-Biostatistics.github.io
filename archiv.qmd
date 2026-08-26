@@ -1,8 +1,8 @@
 ---
-title: "Archiv ročníků"
-description: "Neměnné přehledy materiálů použitých v jednotlivých akademických rocích."
+title: "Archiv semestrů"
+description: "Neměnné přehledy materiálů, rozvrhu, hodnocení a vyučujících v jednotlivých semestrech."
 ---
 
-Každý uzavřený akademický rok odkazuje na konkrétní release každé lekce. Pozdější úpravy aktuálních materiálů proto historické odkazy nezmění.
+Aktivní semestr lze doplňovat a opravovat. Po jeho uzavření se snapshot zmrazí: odkazy na lekce, rozvrh, pravidla hodnocení i kontext vyučujících zůstanou zachovány v podobě platné pro daný semestr.
 
 {{< include _generated/archive-list.md >}}

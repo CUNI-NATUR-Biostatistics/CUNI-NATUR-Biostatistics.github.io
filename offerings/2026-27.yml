@@ -1,8 +1,14 @@
 schema_version: 1
 academic_year: "2026-27"
 label: "2026/27"
+semester_label: "Zimní semestr 2026/27"
+semester_status: preliminary
 frozen: false
 fallback_year: null
+content:
+  schedule: offerings/2026-27/rozvrh.md
+  assessment: offerings/2026-27/hodnoceni.md
+  team: offerings/2026-27/vyucujici.md
 releases:
   L01: null
   L02: null

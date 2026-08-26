@@ -3,12 +3,20 @@ project:
   output-dir: _site
   render:
     - index.qmd
+    - materialy.qmd
+    - jak-pracovat-s-materialy.qmd
+    - vyucujici.qmd
     - archiv.qmd
     - o-kurzu.qmd
     - zacnete.qmd
     - rozvrh.qmd
     - zdroje.qmd
     - hodnoceni.qmd
+    - semestry/*/index.qmd
+    - semestry/*/rozvrh.qmd
+    - semestry/*/hodnoceni.qmd
+    - semestry/*/vyucujici.qmd
+    - semestry/*/*/index.qmd
     - rok/*/index.qmd
     - rok/*/*/index.qmd
 
@@ -16,33 +24,30 @@ lang: cs
 
 website:
   title: "Biostatistika"
-  description: "Studijní materiály ke kurzu Biostatistika MB120P163"
+  description: "Studijní materiály ke kurzu Biostatistika a plánování ekologických pokusů (MB120P163)"
   site-url: "https://cuni-natur-biostatistics.github.io"
   search:
     location: navbar
     type: overlay
   navbar:
     left:
-      - href: index.qmd
-        text: Aktuální ročník
+      - text: Aktuální semestr
+        menu:
+          - href: materialy.qmd
+            text: Materiály
+          - href: rozvrh.qmd
+            text: Rozvrh
+          - href: hodnoceni.qmd
+            text: Závěrečné hodnocení
+      - href: jak-pracovat-s-materialy.qmd
+        text: Jak pracovat s materiály
       - href: archiv.qmd
         text: Archiv
-      - href: o-kurzu.qmd
-        text: O kurzu
-      - href: zacnete.qmd
-        text: Začněte zde
-      - href: rozvrh.qmd
-        text: Rozvrh
-      - href: zdroje.qmd
-        text: Zdroje
-      - href: hodnoceni.qmd
-        text: Hodnocení
+      - href: vyucujici.qmd
+        text: Vyučující
     right:
       - href: https://cuni-natur-biostatistics.github.io/slovnik/
-        text: Slovník
-  page-footer:
-    left: "Biostatistika MB120P163 · Přírodovědecká fakulta Univerzity Karlovy"
-    right: "Materiály jsou verzované podle akademických roků."
+        text: Slovník pojmů
 
 format:
   html:
@@ -52,6 +57,8 @@ format:
       - assets/styles.scss
     include-in-header:
       - assets/brand/fonts-include.html
+    include-after-body:
+      - assets/footer.html
     toc: false
     link-external-newwindow: true
 

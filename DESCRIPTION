@@ -3,7 +3,7 @@ Type: Project
 Title: Biostatistics Course Hub
 Version: 0.0.1
 Authors@R: person("Ondřej", "Mottl", role = c("aut", "cre"))
-Description: Builds the public Quarto hub for MB120P163 release materials.
+Description: Builds the public Quarto hub for the MB120P163 course Biostatistika a plánování ekologických pokusů.
 License: MIT
 Encoding: UTF-8
 Imports:

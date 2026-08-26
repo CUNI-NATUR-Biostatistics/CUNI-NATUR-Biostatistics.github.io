@@ -1,7 +1,11 @@
 /.quarto/
 /_site/
-/_generated/
-/rok/
+/_generated/*
+!/_generated/README.md
+/rok/*
+!/rok/README.md
+/semestry/*
+!/semestry/README.md
 /.Rproj.user/
 /.Rhistory
 /.RData

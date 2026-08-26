@@ -111,7 +111,7 @@ render_lesson_page <- function(lesson, year) {
       paste0(
         "::: {.callout-note}\n",
         paste0(
-          "Tento ro\u010dn\u00edk pou\u017e\u00edv\u00e1 schv\u00e1lenou ",
+          "Tento semestr pou\u017e\u00edv\u00e1 schv\u00e1lenou ",
           "verzi z roku "
         ),
         gsub("-", "/", lesson$release_year),

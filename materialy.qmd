@@ -1,0 +1,13 @@
+---
+title: "Materiály"
+description: "Studijní materiály pro aktuální semestr Biostatistiky."
+page-layout: full
+---
+
+::: {.course-intro}
+Na jednom místě najdete skripta, prezentace, R skripty, vybraná data a zdrojové soubory ke všem lekcím. Publikované odkazy vedou na poslední schválenou stabilní verzi; průběžná pracovní verze není studentům z této stránky nabízena.
+:::
+
+{{< include _generated/current-intro.md >}}
+
+{{< include _generated/current-grid.md >}}
