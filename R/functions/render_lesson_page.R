@@ -46,7 +46,8 @@ render_lesson_page <- function(lesson, year) {
   presentation_html <-
     get_public_resource_url(
       lesson = lesson,
-      resource = resources$presentation$html
+      resource = resources$presentation$html,
+      channel = "archive"
     )
   vec_actions <-
     c(
@@ -61,7 +62,8 @@ render_lesson_page <- function(lesson, year) {
         label = "Skripta HTML",
         href = get_public_resource_url(
           lesson = lesson,
-          resource = resources$learning$html
+          resource = resources$learning$html,
+          channel = "archive"
         ),
         primary = TRUE
       ),
@@ -69,31 +71,38 @@ render_lesson_page <- function(lesson, year) {
         label = "Skripta PDF",
         href = get_public_resource_url(
           lesson = lesson,
-          resource = resources$learning$pdf
+          resource = resources$learning$pdf,
+          channel = "archive"
         )
       ),
       render_resource_link(
         label = "Prezentace PDF",
         href = get_public_resource_url(
           lesson = lesson,
-          resource = resources$presentation$pdf
+          resource = resources$presentation$pdf,
+          channel = "archive"
         )
       ),
       render_resource_link(
         label = "QMD skript",
-        href = get_source_blob_url(
+        href = get_public_resource_url(
           lesson = lesson,
-          resource = resources$learning$source
+          resource = resources$learning$source,
+          channel = "archive"
         )
       ),
       render_resource_link(
         label = "QMD prezentace",
-        href = get_source_blob_url(
+        href = get_public_resource_url(
           lesson = lesson,
-          resource = resources$presentation$source
+          resource = resources$presentation$source,
+          channel = "archive"
         )
       ),
-      render_supplementary_links(lesson = lesson)
+      render_supplementary_links(
+        lesson = lesson,
+        channel = "archive"
+      )
     )
 
   status_note <- ""

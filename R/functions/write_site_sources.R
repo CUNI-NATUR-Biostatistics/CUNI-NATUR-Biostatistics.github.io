@@ -28,7 +28,8 @@ write_site_sources <- function(catalog, output_directory = "_generated") {
         vec_current_cards,
         render_lesson_card(
           lesson = lesson,
-          year_slug = current_year$slug
+          year_slug = current_year$slug,
+          channel = "current"
         )
       )
   }
@@ -85,7 +86,8 @@ write_site_sources <- function(catalog, output_directory = "_generated") {
           vec_year_cards,
           render_lesson_card(
             lesson = lesson,
-            year_slug = year$slug
+            year_slug = year$slug,
+            channel = "archive"
           )
         )
     }

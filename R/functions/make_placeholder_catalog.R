@@ -29,6 +29,7 @@ make_placeholder_catalog <- function(config) {
           release = NULL,
           release_year = NULL,
           material_base_url = NULL,
+          release_base_url = NULL,
           manifest = NULL
         )
     }

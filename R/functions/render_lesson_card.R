@@ -10,7 +10,12 @@
 #
 #----------------------------------------------------------#
 
-render_lesson_card <- function(lesson, year_slug) {
+render_lesson_card <- function(
+  lesson,
+  year_slug,
+  channel = c("current", "archive")
+) {
+  channel <- match.arg(channel)
   status_label <- "P\u0159ipravujeme"
   status_class <- "lesson-status lesson-status--preparing"
   if (identical(lesson$status, "published")) {
@@ -66,39 +71,44 @@ render_lesson_card <- function(lesson, year_slug) {
   learning_html <-
     get_public_resource_url(
       lesson = lesson,
-      resource = resources$learning$html
+      resource = resources$learning$html,
+      channel = channel
     )
   learning_pdf <-
     get_public_resource_url(
       lesson = lesson,
-      resource = resources$learning$pdf
+      resource = resources$learning$pdf,
+      channel = channel
     )
   presentation_html <-
     get_public_resource_url(
       lesson = lesson,
-      resource = resources$presentation$html
+      resource = resources$presentation$html,
+      channel = channel
     )
   presentation_pdf <-
     get_public_resource_url(
       lesson = lesson,
-      resource = resources$presentation$pdf
+      resource = resources$presentation$pdf,
+      channel = channel
     )
   learning_source <-
-    get_source_blob_url(
+    get_public_resource_url(
       lesson = lesson,
-      resource = resources$learning$source
+      resource = resources$learning$source,
+      channel = channel
     )
   presentation_source <-
-    get_source_blob_url(
+    get_public_resource_url(
       lesson = lesson,
-      resource = resources$presentation$source
+      resource = resources$presentation$source,
+      channel = channel
     )
   repository_url <-
     paste0(
       "https://github.com/",
       lesson$manifest$repository,
-      "/tree/",
-      lesson$release
+      "/tree/main"
     )
 
   vec_primary <-
@@ -138,7 +148,10 @@ render_lesson_card <- function(lesson, year_slug) {
       )
     )
   vec_supplementary <-
-    render_supplementary_links(lesson = lesson)
+    render_supplementary_links(
+      lesson = lesson,
+      channel = channel
+    )
   meta <-
     paste0(
       escape_html(lesson$release),

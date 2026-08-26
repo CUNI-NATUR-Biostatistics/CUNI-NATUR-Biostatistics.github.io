@@ -10,7 +10,11 @@
 #
 #----------------------------------------------------------#
 
-render_supplementary_links <- function(lesson) {
+render_supplementary_links <- function(
+  lesson,
+  channel = c("current", "archive")
+) {
+  channel <- match.arg(channel)
   vec_links <- character()
 
   list_groups <-
@@ -44,7 +48,8 @@ render_supplementary_links <- function(lesson) {
             label = label,
             href = get_public_resource_url(
               lesson = lesson,
-              resource = entry
+              resource = entry,
+              channel = channel
             ),
             download = TRUE
           )

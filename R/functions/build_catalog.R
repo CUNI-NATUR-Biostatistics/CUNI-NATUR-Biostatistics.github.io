@@ -56,6 +56,7 @@ build_catalog <- function(config) {
             release = NULL,
             release_year = NULL,
             material_base_url = NULL,
+            release_base_url = NULL,
             manifest = NULL
           )
         next
@@ -105,6 +106,11 @@ build_catalog <- function(config) {
             base_url = config$pages_base_url,
             lesson_id = lesson_id,
             release_tag = release_tag
+          ),
+          release_base_url = get_material_base_url(
+            base_url = config$pages_base_url,
+            lesson_id = lesson_id,
+            release_tag = manifest$tag
           ),
           manifest = manifest
         )
