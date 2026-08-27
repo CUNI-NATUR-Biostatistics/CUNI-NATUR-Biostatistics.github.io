@@ -5,7 +5,7 @@ page-layout: full
 ---
 
 ::: {.course-intro}
-Na jednom místě najdete skripta, prezentace, R skripty, vybraná data a zdrojové soubory ke všem lekcím. Publikované odkazy vedou na poslední schválenou stabilní verzi; průběžná pracovní verze není studentům z této stránky nabízena.
+Na jednom místě najdete skripta, prezentace, R skripty a data ke všem lekcím. Tlačítka vždy vedou k verzi, která je připravená pro studenty; nemusíte sledovat pracovní změny na GitHubu ani rozlišovat technické verze souborů.
 :::
 
 {{< include _generated/current-intro.md >}}

@@ -54,7 +54,15 @@ Každý lekční web má tři kanály:
 - `/LXX/current/` ukazuje na poslední stabilní tag;
 - `/LXX/releases/<tag>/` uchovává neměnnou historickou verzi.
 
-HUB na vývojový kanál `preview` neodkazuje. Karty aktuálního semestru používají stabilní `/LXX/current/`, zatímco odkaz na repozitář vede na `main`. Archivní karty používají `/LXX/releases/<tag>/` a stejný tag v repozitáři.
+HUB na vývojový kanál `preview` neodkazuje. Karty aktuálního semestru používají stabilní `/LXX/current/`, zatímco odkaz na repozitář vede na `main`. Archivní karty používají `/LXX/releases/<tag>/` a stejný tag v repozitáři. Odkaz na repozitář je veřejně funkční pouze tehdy, když je příslušný týdenní repozitář veřejný; tuto podmínku je nutné ověřit před prvním vydáním lekce.
+
+## Veřejnost, soukromí a licence
+
+HUB a Pages jednotlivých lekcí jsou veřejné publikační plochy. Do `website-release.yml` proto patří jen schválené výukové materiály, veřejná cvičení a data s ověřenou provenancí a podmínkami užití. Osobní údaje studentů, individuální výsledky, neveřejná zadání a řešení, přístupové údaje a interní provozní poznámky patří do Moodle nebo jiného schváleného soukromého systému.
+
+Manifest je allowlist release balíčku, nikoli ochrana veřejného repozitáře: pokud je týdenní repozitář veřejný, je veřejný celý jeho commitnutý obsah a historie. Před změnou viditelnosti je proto potřeba provést samostatný audit celého repozitáře.
+
+Původní výukový obsah kurzu je otevřeně licencován pod CC BY 4.0 a software pod licencí MIT. Přesné vymezení, doporučenou citaci a výjimky shrnuje [`LICENSE.md`](LICENSE.md). Převzatá data, obrázky, fonty, loga a další položky zůstávají pod vlastními podmínkami a atribucemi.
 
 ## Semestry a archiv
 

@@ -1,14 +1,14 @@
 ---
 title: "Jak pracovat s materiály"
-description: "Studijní rytmus, technický start a vysvětlení jednotlivých zdrojů kurzu."
+description: "Jak se připravovat na výuku, začít s R a vybrat správný studijní materiál."
 ---
 
 ## Doporučený týdenní rytmus
 
-1. Před výukou si přečtěte výsledky učení a rychle projděte HTML skripta.
+1. Před výukou si přečtěte hlavní otázku a cíle lekce a rychle projděte HTML skripta.
 2. Na přednášce pracujte s biologickou otázkou, grafy a interpretací; prezentace není náhradou skript.
-3. Na praktiku spusťte R skript po jednotlivých krocích a každý důležitý výsledek vysvětlete vlastními slovy.
-4. Po výuce zopakujte celé workflow bez slepého kopírování a poznamenejte si, čemu ještě nerozumíte.
+3. Na praktiku spusťte R skript po jednotlivých krocích a u každého důležitého výsledku si položte otázku: „Co mi to říká o původní biologické otázce?“
+4. Po výuce zkuste projít cestu od otázky k závěru bez slepého kopírování a poznamenejte si, čemu ještě nerozumíte.
 5. Nejasnosti řešte včas na praktiku, konzultaci nebo v komunikačním kanálu uvedeném v Moodle.
 
 ## Co znamenají odkazy u lekce
@@ -21,16 +21,16 @@ description: "Studijní rytmus, technický start a vysvětlení jednotlivých zd
 | Prezentace PDF | Neinteraktivní verze slidů pro offline použití. |
 | R skript | Praktické provedení analýzy; spouštějte jej po jednotlivých krocích. |
 | Data | Datové soubory potřebné pro danou lekci. |
-| QMD zdroj | Zdroj Quarto dokumentu ukazující, jak vznikl text nebo prezentace. |
-| Repozitář | Aktuální pracovní obsah lekce na GitHubu; může být napřed oproti schválené verzi. |
+| QMD zdroj | Soubor, ze kterého vznikl text nebo prezentace. Je určen hlavně zájemcům; pro běžné studium jej nepotřebujete. |
+| Repozitář | Zdrojová a pracovní historie lekce, pokud je repozitář veřejně zpřístupněn. Pro běžné studium jej nepotřebujete a jeho obsah může být napřed oproti schváleným materiálům. |
 
 ## R a RStudio
 
-Nainstalujte [R](https://cran.r-project.org/) a [RStudio Desktop](https://posit.co/download/rstudio-desktop/). Pro každou lekci otevřete její projekt a řiďte se pokyny v R skriptu. Pokud s R nebo RStudio začínáte, využijte volitelnou orientaci L00. Balíčky se mohou mezi lekcemi lišit; neinstalujte náhodně nové verze uprostřed rozpracované analýzy.
+Nainstalujte [R](https://cran.r-project.org/) a [RStudio Desktop](https://posit.co/download/rstudio-desktop/). Pro každou lekci otevřete její projektovou složku v RStudiu a řiďte se pokyny v R skriptu. Pokud s R nebo RStudiem začínáte, využijte volitelný úvod před začátkem pravidelné výuky. Potřebné balíčky se mohou mezi lekcemi lišit; jejich instalaci řešte podle pokynů v materiálech.
 
 ## Stabilní a archivované verze
 
-Stránka **Materiály** odkazuje na poslední schválenou verzi každé lekce (<code>current</code>). Když vyučující připravuje opravu, pracovní náhled se může změnit, ale stabilní odkaz zůstává stejný až do vydání nové verze. **Archiv** naproti tomu používá konkrétní označené verze; uzavřený semestr se už nemění.
+Stránka **Materiály** vždy odkazuje na poslední verzi každé lekce schválenou pro studenty. Opravy, které vyučující teprve připravují, tento odkaz nezmění. **Archiv** uchovává materiály tak, jak byly používány v konkrétním semestru; uzavřený semestr se už nemění.
 
 ## Když se něco nedaří
 

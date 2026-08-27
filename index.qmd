@@ -1,6 +1,6 @@
 ---
 title: "Biostatistika a plánování ekologických pokusů"
-subtitle: "Od biologické otázky k transparentnímu statistickému závěru"
+subtitle: "Jak pomocí dobře navrženého pokusu a dat odpovědět na biologickou otázku"
 description: "Veřejný průvodce kurzem Biostatistika a plánování ekologických pokusů (MB120P163) na Přírodovědecké fakultě Univerzity Karlovy."
 page-layout: full
 ---
@@ -9,7 +9,7 @@ page-layout: full
 <div class="course-hero__content">
 <p class="eyebrow">MB120P163 · Přírodovědecká fakulta UK</p>
 <h2>Biostatistika a plánování ekologických pokusů</h2>
-<p class="course-hero__lead">Kurz staví statistiku kolem modelů, biologických otázek a interpretace. Nejde jen o to získat výsledek v R, ale rozumět, co výsledek znamená, na čem stojí a jak jej reprodukovat.</p>
+<p class="course-hero__lead">Liší se dvě skupiny skutečně, nebo jen náhodou? Ovlivnila pozorovaný výsledek naše manipulace, prostředí, nebo způsob měření? V kurzu se naučíte navrhnout smysluplné srovnání, získat z dat užitečnou odpověď a jasně říct, co výsledky podporují — a co z nich naopak tvrdit nemůžeme.</p>
 <div class="hero-actions">
 <a class="resource-link resource-link--primary" href="materialy.html">Materiály aktuálního semestru</a>
 <a class="resource-link" href="rozvrh.html">Rozvrh 2026/27</a>
@@ -18,7 +18,8 @@ page-layout: full
 <dl class="course-facts" aria-label="Základní informace o kurzu">
 <div><dt><i class="bi bi-book" aria-hidden="true"></i>Kód</dt><dd>MB120P163</dd></div>
 <div><dt><i class="bi bi-calendar3" aria-hidden="true"></i>Semestr</dt><dd>Zimní 2026/27</dd></div>
-<div><dt><i class="bi bi-award" aria-hidden="true"></i>Rozsah</dt><dd>2/2, 5 kreditů</dd></div>
+<div><dt><i class="bi bi-clock" aria-hidden="true"></i>Výuka</dt><dd>90 min přednáška + 90 min praktikum týdně</dd></div>
+<div><dt><i class="bi bi-award" aria-hidden="true"></i>Kredity</dt><dd>5</dd></div>
 <div><dt><i class="bi bi-translate" aria-hidden="true"></i>Jazyk</dt><dd>Čeština</dd></div>
 <div><dt><i class="bi bi-building" aria-hidden="true"></i>Instituce</dt><dd>Přírodovědecká fakulta UK</dd></div>
 </dl>
@@ -26,20 +27,38 @@ page-layout: full
 
 ## Pro koho kurz je
 
-Kurz je určen především studentům biologických a ekologických oborů, kteří chtějí samostatně pracovat s daty a kriticky číst výsledky analýz. Předchozí zkušenost se statistikou ani s R není nutná. Pomůže ochota pravidelně pracovat s daty, grafy a krátkými R skripty; pro úplné začátečníky je připravena volitelná orientace L00.
+Kurz je určen především studentům biologických a ekologických oborů, kteří chtějí rozumět datům z pozorování a pokusů a používat je k odpovědím na vědecké otázky. Předchozí zkušenost se statistikou ani s R není nutná. Všechny důležité pojmy i práci v R budujeme od základů; úplní začátečníci mohou před zahájením výuky využít volitelný úvod do R a RStudia.
 
-## Jak se v kurzu učíme
+## Od otázky k poznání
 
 <div class="principle-grid">
-<article class="principle-card"><span>01</span><h3>Začínáme otázkou</h3><p>Nejprve formulujeme biologický problém, teprve potom volíme proměnné, graf a model.</p></article>
-<article class="principle-card"><span>02</span><h3>Model je pracovní nástroj</h3><p>Od prvních lekcí propojujeme popis dat, odhad efektu, nejistotu, diagnostiku a porovnání modelů.</p></article>
-<article class="principle-card"><span>03</span><h3>Interpretace je součást analýzy</h3><p>Výsledek nestačí vypočítat. Musíme jej vysvětlit v biologickém kontextu a pojmenovat jeho omezení.</p></article>
-<article class="principle-card"><span>04</span><h3>Postup musí být reprodukovatelný</h3><p>Pracujeme v R, uchováváme kód a propojujeme data, analýzu, grafy a závěr.</p></article>
+<article class="principle-card"><span>01</span><h3>Co chceme zjistit?</h3><p>Konkrétní biologická otázka určuje, co potřebujeme pozorovat, měřit nebo porovnat.</p></article>
+<article class="principle-card"><span>02</span><h3>Jak získáme přesvědčivá data?</h3><p>Promyslíme uspořádání pokusu, způsob měření i možné vlivy, které by mohly výsledek zkreslit.</p></article>
+<article class="principle-card"><span>03</span><h3>Co nám data dovolují tvrdit?</h3><p>Pomocí grafů a jednoduchých výpočtů hledáme souvislosti, pracujeme s nejistotou a rozlišujeme signál od náhodného kolísání.</p></article>
+<article class="principle-card"><span>04</span><h3>Dokáže náš postup zopakovat někdo další?</h3><p>V R uchováváme jednotlivé kroky od načtení dat až po graf a závěr, aby byl celý postup průhledný a opakovatelný.</p></article>
 </div>
 
-## Výuka a výsledky učení
+## Jak výuka probíhá
 
-Kurz tvoří týdenní devadesátiminutová přednáška a navazující praktikum v jedné z pěti skupin. Přednáška vytváří koncepční mapu; praktikum vede k samostatnému provedení stejného analytického workflow na datech.
+Každý týden se na přednášce podíváme na biologickou otázku, data a způsob, jak z nich dojít k obhajitelnému závěru. Na navazujícím praktiku si stejný způsob uvažování vyzkoušíte v menší skupině přímo v R. Cílem není zapamatovat si co nejvíce příkazů, ale umět vysvětlit, proč daný krok děláme a co nám jeho výsledek říká.
+
+## Co si z kurzu odnesete
+
+Po absolvování kurzu byste měli být schopni vzít biologickou otázku a tabulku dat a dojít k závěru, kterému rozumíte a který dokážete vysvětlit. Zejména budete umět:
+
+::: {.learning-outcomes}
+- navrhnout smysluplné měření nebo srovnání a poznat, co může výsledek zkreslit;
+- data zkontrolovat, přehledně zobrazit a popsat důležité rozdíly či souvislosti;
+- rozlišit zajímavý vzorec v datech od přesvědčivého důkazu a vyjádřit nejistotu výsledku;
+- posoudit, zda zvolený způsob analýzy odpovídá položené otázce a uspořádání dat;
+- provést základní analýzu v R tak, aby ji mohl zkontrolovat a zopakovat někdo další;
+- napsat krátký biologický závěr, který nepřehání, co data skutečně ukazují.
+:::
+
+V oficiálních výsledcích učení níže se objevuje pojem **statistický model**. V tomto kurzu tím myslíme zjednodušený popis toho, jak pozorovaný výsledek souvisí s podmínkami, skupinami nebo jinými měřenými veličinami. Jeho znalost se předem nepředpokládá.
+
+<details class="learning-outcomes-details">
+<summary>Zobrazit podrobné oficiální výsledky učení</summary>
 
 Po absolvování kurzu dokážete:
 
@@ -58,6 +77,8 @@ Po absolvování kurzu dokážete:
 - zvolit vhodný model pro kategoriální odezvu a zdůvodnit, proč lineární model nestačí pro binární data;
 - sestavit základní workflow analýzy v R: načtení dat → vizualizace → model → diagnostika → interpretace.
 :::
+
+</details>
 
 ## Kde hledat informace
 

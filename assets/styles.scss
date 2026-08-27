@@ -215,6 +215,25 @@ body {
   margin-bottom: 0.55rem;
 }
 
+.learning-outcomes-details {
+  margin: 1.25rem 0 3rem;
+  padding: 1rem 1.2rem;
+  border: 1px solid var(--course-border);
+  border-left: 0.3rem solid var(--course-highlight);
+  border-radius: 0.75rem;
+  background: var(--course-soft);
+}
+
+.learning-outcomes-details summary {
+  color: var(--course-primary-dark);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.learning-outcomes-details[open] summary {
+  margin-bottom: 1rem;
+}
+
 .system-card__title {
   display: flex;
   gap: 0.65rem;
