@@ -582,6 +582,20 @@ body {
   font-size: 0.82rem;
 }
 
+@media (min-width: 641px) {
+  .coordinator-profile {
+    grid-template-columns: minmax(18rem, 21rem) minmax(0, 1fr);
+  }
+
+  .coordinator-profile img {
+    align-self: center;
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 1;
+    object-fit: contain;
+  }
+}
+
 .course-footer {
   grid-column: screen-start / screen-end;
   margin-top: 3rem;

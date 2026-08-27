@@ -8,6 +8,8 @@
 <li><i class="bi bi-building" aria-hidden="true"></i><span>Katedra botaniky</span></li>
 <li><i class="bi bi-geo-alt" aria-hidden="true"></i><span>Benátská 2, 2. patro, místnost 59</span></li>
 <li><i class="bi bi-envelope" aria-hidden="true"></i><a href="mailto:ondrej.mottl@natur.cuni.cz">ondrej.mottl@natur.cuni.cz</a></li>
+<li><i class="bi bi-globe2" aria-hidden="true"></i><a href="https://ondrejmottl.github.io/">Osobní web</a></li>
+<li><i class="bi bi-people" aria-hidden="true"></i><a href="https://ondrejmottl.github.io/lab/about_the_lab.html">Laboratory of Quantitative Ecology</a></li>
 <li><i class="bi bi-person-badge" aria-hidden="true"></i><a href="https://natur.cuni.cz/osoba?poid=1405359277326058">Profil PřF UK</a></li>
 <li><i class="bi bi-link-45deg" aria-hidden="true"></i><a href="https://orcid.org/0000-0002-9796-5081">ORCID</a></li>
 </ul>
