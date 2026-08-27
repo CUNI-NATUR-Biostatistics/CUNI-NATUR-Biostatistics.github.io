@@ -1,7 +1,15 @@
 ---
 title: "Jak pracovat s materiály"
-description: "Jak se připravovat na výuku, začít s R a vybrat správný studijní materiál."
+description: "Jak se připravovat na výuku, začít se statistickým softwarem R a vybrat správný studijní materiál."
 ---
+
+## Co jsou R a RStudio
+
+[R](https://cran.r-project.org/) je bezplatný statistický software a programovací jazyk, který budeme používat ke kontrole dat, výpočtům a tvorbě grafů. [RStudio Desktop](https://posit.co/download/rstudio-desktop/) je aplikace, která práci s R usnadňuje: v jednom okně umožňuje psát postup, prohlížet data, spouštět jednotlivé příkazy a zobrazovat výsledky.
+
+**R skript** je obyčejný textový soubor s příkazy pro R. Uchovává jednotlivé kroky analýzy, takže je nemusíte pokaždé zadávat znovu a někdo další může váš postup zkontrolovat nebo zopakovat. **Projekt v RStudiu** propojuje skript, data a další soubory jedné lekce v jedné projektové složce.
+
+Nainstalujte R i RStudio Desktop. Pokud s programováním začínáte, využijte volitelný úvod před začátkem pravidelné výuky. Lekce mohou používat také doplňky pro R, kterým se říká **balíčky** (packages); jejich instalaci řešte podle konkrétních pokynů v materiálech.
 
 ## Doporučený týdenní rytmus
 
@@ -19,14 +27,10 @@ description: "Jak se připravovat na výuku, začít s R a vybrat správný stud
 | Skripta PDF | Stejný obsah pro offline čtení nebo tisk. |
 | Prezentace HTML | Interaktivní slidy používané při výuce. |
 | Prezentace PDF | Neinteraktivní verze slidů pro offline použití. |
-| R skript | Praktické provedení analýzy; spouštějte jej po jednotlivých krocích. |
+| R skript | Textový soubor s příkazy pro R, který vás provede praktickou analýzou krok za krokem. |
 | Data | Datové soubory potřebné pro danou lekci. |
 | QMD zdroj | Soubor, ze kterého vznikl text nebo prezentace. Je určen hlavně zájemcům; pro běžné studium jej nepotřebujete. |
 | Repozitář | Zdrojová a pracovní historie lekce, pokud je repozitář veřejně zpřístupněn. Pro běžné studium jej nepotřebujete a jeho obsah může být napřed oproti schváleným materiálům. |
-
-## R a RStudio
-
-Nainstalujte [R](https://cran.r-project.org/) a [RStudio Desktop](https://posit.co/download/rstudio-desktop/). Pro každou lekci otevřete její projektovou složku v RStudiu a řiďte se pokyny v R skriptu. Pokud s R nebo RStudiem začínáte, využijte volitelný úvod před začátkem pravidelné výuky. Potřebné balíčky se mohou mezi lekcemi lišit; jejich instalaci řešte podle pokynů v materiálech.
 
 ## Stabilní a archivované verze
 
@@ -34,7 +38,7 @@ Stránka **Materiály** vždy odkazuje na poslední verzi každé lekce schvále
 
 ## Když se něco nedaří
 
-- Zkontrolujte, že jste otevřeli správný RStudio projekt a že soubory nepřesouváte mimo jeho složku.
+- Zkontrolujte, že jste otevřeli správný projekt v RStudiu a že soubory nepřesouváte mimo jeho složku.
 - Spusťte skript od začátku a přečtěte první chybovou hlášku, ne pouze poslední následek.
 - Porovnejte svůj soubor se stabilní verzí na stránce Materiály.
 - U dotazu uveďte lekci, krok, přesnou hlášku a co jste již vyzkoušeli; neposílejte pouze snímek obrazovky bez kontextu.

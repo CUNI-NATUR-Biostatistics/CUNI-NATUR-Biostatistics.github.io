@@ -27,7 +27,7 @@ page-layout: full
 
 ## Pro koho kurz je
 
-Kurz je určen především studentům biologických a ekologických oborů, kteří chtějí rozumět datům z pozorování a pokusů a používat je k odpovědím na vědecké otázky. Předchozí zkušenost se statistikou ani s R není nutná. Všechny důležité pojmy i práci v R budujeme od základů; úplní začátečníci mohou před zahájením výuky využít volitelný úvod do R a RStudia.
+Kurz je určen především studentům biologických a ekologických oborů, kteří chtějí rozumět datům z pozorování a pokusů a používat je k odpovědím na vědecké otázky. Předchozí zkušenost se statistikou, datovou analýzou ani programováním není nutná. Všechny důležité pojmy i práci se statistickým softwarem R budujeme od základů; úplní začátečníci mohou před zahájením výuky využít volitelný úvod do programování ve jazyce R pomocí RStudia.
 
 ## Od otázky k poznání
 
@@ -40,7 +40,7 @@ Kurz je určen především studentům biologických a ekologických oborů, kte
 
 ## Jak výuka probíhá
 
-Každý týden se na přednášce podíváme na biologickou otázku, data a způsob, jak z nich dojít k obhajitelnému závěru. Na navazujícím praktiku si stejný způsob uvažování vyzkoušíte v menší skupině přímo v R. Cílem není zapamatovat si co nejvíce příkazů, ale umět vysvětlit, proč daný krok děláme a co nám jeho výsledek říká.
+Každý týden se na přednášce podíváme na biologickou otázku, data a způsob, jak z nich dojít k obhajitelnému závěru. Na navazujícím praktiku si stejný způsob uvažování vyzkoušíte v menší skupině pomocí R. Cílem není zapamatovat si co nejvíce příkazů, ale umět vysvětlit, proč daný krok děláme a co nám jeho výsledek říká.
 
 ## Co si z kurzu odnesete
 
