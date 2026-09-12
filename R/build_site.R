@@ -24,6 +24,7 @@ source("R/functions/render_supplementary_links.R")
 source("R/functions/render_lesson_card.R")
 source("R/functions/render_lesson_page.R")
 source("R/functions/read_semester_fragment.R")
+source("R/functions/inject_schedule_lesson_cards.R")
 source(
   "R/functions/render_redirect_page.R",
   encoding = "UTF-8"

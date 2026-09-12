@@ -10,7 +10,7 @@ SIS zůstává místem zápisu a oficiální evidence. [Moodle](https://dl2.cuni
 
 | Cesta | Úloha |
 | --- | --- |
-| `config/course.yml` | Základní metadata kurzu, aktuální semestr a seznam lekcí L01–L12. |
+| `config/course.yml` | Základní metadata kurzu, aktuální semestr, lekce L01–L12 a umístění doplňkových lekcí, jako je L00. |
 | `offerings/YYYY-YY.yml` | Stav semestru, odkazy na obsahové fragmenty a případně připnuté release tagy. |
 | `offerings/YYYY-YY/` | Ručně upravovaný rozvrh, hodnocení a tým daného semestru. |
 | `assets/instructors/` | Lokální optimalizované portréty vyučujících. |
@@ -55,6 +55,10 @@ Každý lekční web má tři kanály:
 - `/LXX/releases/<tag>/` uchovává neměnnou historickou verzi.
 
 HUB na vývojový kanál `preview` neodkazuje. Karty aktuálního semestru používají stabilní `/LXX/current/`, zatímco odkaz na repozitář vede na `main`. Archivní karty používají `/LXX/releases/<tag>/` a stejný tag v repozitáři. Odkaz na repozitář je veřejně funkční pouze tehdy, když je příslušný týdenní repozitář veřejný; tuto podmínku je nutné ověřit před prvním vydáním lekce.
+
+Každá položka v `config/course.yml` může pomocí `placement` určit umístění karty. Výchozí hodnota `materials` patří do hlavního přehledu materiálů; hodnota `schedule` vloží kartu na označené místo v rozvrhu. Volba `repository_link: false` skryje pouze odkaz na soukromý zdrojový repozitář, zatímco veřejné QMD soubory a ostatní schválené zdroje z release balíčku zůstanou dostupné.
+
+Rozvrh semestru s kartou umístěnou pomocí `placement: schedule` musí obsahovat právě jednu samostatnou značku `<!-- lesson-cards: schedule -->`. Generátor ji při sestavení nahradí kartou pro aktuální nebo archivní vydání; odvozené soubory pod `_generated/` a `semestry/` se ručně neupravují.
 
 ## Veřejnost, soukromí a licence
 

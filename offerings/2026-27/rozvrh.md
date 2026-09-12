@@ -15,7 +15,7 @@
 
 Praktika navazují na pondělní přednášku příslušného týdne. Při zápisu se řiďte konkrétní skupinou v SIS.
 
-## Volitelná orientace L00
+## Volitelná orientace L00 {#l00}
 
 První úterní a čtvrteční termíny před začátkem přednášek slouží jako dobrovolná orientace v R a RStudio:
 
@@ -23,6 +23,8 @@ První úterní a čtvrteční termíny před začátkem přednášek slouží j
 - **čtvrtek 1. října 2026** pro čtvrteční skupinu.
 
 Studenti pondělních skupin mohou základní orientaci projít samostatně podle veřejných materiálů L00. Účast na L00 není podmínkou absolvování kurzu.
+
+<!-- lesson-cards: schedule -->
 
 ## Přednášky a témata
 

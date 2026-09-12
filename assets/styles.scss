@@ -263,6 +263,19 @@ body {
   margin: 1rem 0 2.5rem;
 }
 
+.lesson-grid--schedule {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.lesson-grid--schedule .lesson-card {
+  min-width: 0;
+  min-height: auto;
+}
+
+.lesson-grid--schedule .lesson-card__topline {
+  flex-wrap: wrap;
+}
+
 .lesson-card {
   display: flex;
   min-height: 19rem;

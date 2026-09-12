@@ -48,6 +48,8 @@ build_catalog <- function(config) {
           list(
             id = lesson_id,
             title = lesson_config$title,
+            placement = lesson_config$placement,
+            repository_link = lesson_config$repository_link,
             subtitle = "",
             status = "preparing",
             release = NULL,
@@ -95,6 +97,8 @@ build_catalog <- function(config) {
         list(
           id = lesson_id,
           title = manifest$title,
+          placement = lesson_config$placement,
+          repository_link = lesson_config$repository_link,
           subtitle = manifest$subtitle,
           status = status,
           release = manifest$tag,
