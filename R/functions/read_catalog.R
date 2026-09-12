@@ -36,6 +36,17 @@ read_catalog <- function(config, path = "data/catalog.json") {
     year$frozen <- isTRUE(offering$frozen)
     year$content <- offering$content
     year$content_hashes <- offering$content_hashes
+    for (
+      lesson_config in config$lessons
+      ) {
+      lesson <- year$lessons[[lesson_config$id]]
+      if (is.null(lesson)) {
+        next
+      }
+      lesson$placement <- lesson_config$placement
+      lesson$repository_link <- lesson_config$repository_link
+      year$lessons[[lesson_config$id]] <- lesson
+    }
     catalog$years[[year_config$slug]] <- year
   }
 

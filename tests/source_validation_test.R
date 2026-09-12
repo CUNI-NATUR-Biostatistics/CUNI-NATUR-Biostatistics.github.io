@@ -1,6 +1,7 @@
 # Static syntax and configuration checks for the HUB sources.
 
 source("R/functions/read_utf8_yaml.R")
+source("R/functions/read_course_config.R")
 
 r_files <-
   c(
@@ -29,8 +30,21 @@ invisible(
 )
 
 quarto_config <- read_utf8_yaml("_quarto.yml")
-course_config <- read_utf8_yaml("config/course.yml")
+course_config <- read_course_config()
 offering <- read_utf8_yaml("offerings/2026-27.yml")
+lesson_ids <-
+  vapply(
+    course_config$lessons,
+    function(lesson) lesson$id,
+    character(1)
+  )
+l00 <- course_config$lessons[[match("L00", lesson_ids)]]
+regular_lessons <- course_config$lessons[lesson_ids != "L00"]
+materials_source <-
+  paste(
+    readLines("materialy.qmd", encoding = "UTF-8"),
+    collapse = "\n"
+  )
 
 stopifnot(
   identical(quarto_config$website$title, "Biostatistika"),
@@ -44,10 +58,60 @@ stopifnot(
     "Zimn\u00ed semestr 2026/27"
   ),
   identical(offering$semester_status, "preliminary"),
+  "L00" %in% names(offering$releases),
+  identical(l00$placement, "schedule"),
+  identical(l00$repository_link, FALSE),
+  all(
+    vapply(
+      regular_lessons,
+      function(lesson) identical(lesson$placement, "materials"),
+      logical(1)
+    )
+  ),
+  all(
+    vapply(
+      regular_lessons,
+      function(lesson) identical(lesson$repository_link, TRUE),
+      logical(1)
+    )
+  ),
+  grepl("rozvrh.html#l00", materials_source, fixed = TRUE),
   all(
     c("schedule", "assessment", "team") %in%
       names(offering$content)
   )
+)
+
+expect_config_error <- function(candidate, pattern) {
+  candidate_path <- tempfile(fileext = ".yml")
+  on.exit(unlink(candidate_path, force = TRUE), add = TRUE)
+  yaml::write_yaml(candidate, candidate_path)
+  condition <-
+    tryCatch(
+      {
+        read_course_config(path = candidate_path)
+        NULL
+      },
+      error = identity
+    )
+  stopifnot(
+    inherits(condition, "error"),
+    grepl(pattern, conditionMessage(condition), fixed = TRUE)
+  )
+}
+
+invalid_placement <- course_config
+invalid_placement$lessons[[1]]$placement <- "sidebar"
+expect_config_error(
+  candidate = invalid_placement,
+  pattern = "placement must be materials or schedule"
+)
+
+invalid_repository_link <- course_config
+invalid_repository_link$lessons[[1]]$repository_link <- "false"
+expect_config_error(
+  candidate = invalid_repository_link,
+  pattern = "repository_link must be true or false"
 )
 
 message("HUB R syntax and YAML validation passed.")

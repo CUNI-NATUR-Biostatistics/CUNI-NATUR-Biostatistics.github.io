@@ -104,18 +104,6 @@ render_lesson_card <- function(
       resource = resources$presentation$source,
       channel = channel
     )
-  repository_ref <- "main"
-  if (identical(channel, "archive")) {
-    repository_ref <- lesson$release
-  }
-  repository_url <-
-    paste0(
-      "https://github.com/",
-      lesson$manifest$repository,
-      "/tree/",
-      repository_ref
-    )
-
   vec_primary <-
     c(
       render_resource_link(
@@ -152,13 +140,30 @@ render_lesson_card <- function(
         label = "QMD prezentace",
         href = presentation_source,
         icon = "file-earmark-code"
-      ),
-      render_resource_link(
-        label = "Repozit\u00e1\u0159",
-        href = repository_url,
-        icon = "github"
       )
     )
+  if (!identical(lesson$repository_link, FALSE)) {
+    repository_ref <- "main"
+    if (identical(channel, "archive")) {
+      repository_ref <- lesson$release
+    }
+    repository_url <-
+      paste0(
+        "https://github.com/",
+        lesson$manifest$repository,
+        "/tree/",
+        repository_ref
+      )
+    vec_sources <-
+      c(
+        vec_sources,
+        render_resource_link(
+          label = "Repozit\u00e1\u0159",
+          href = repository_url,
+          icon = "github"
+        )
+      )
+  }
   vec_supplementary <-
     render_supplementary_links(
       lesson = lesson,

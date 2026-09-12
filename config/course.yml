@@ -9,6 +9,10 @@ years:
     label: "2026/27"
     offering: offerings/2026-27.yml
 lessons:
+  - id: L00
+    title: "První kroky v R"
+    placement: schedule
+    repository_link: false
   - id: L01
     title: "Typy dat a popis jedné proměnné"
   - id: L02

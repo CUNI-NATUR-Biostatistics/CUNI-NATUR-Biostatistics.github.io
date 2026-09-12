@@ -3,6 +3,7 @@
 source("R/functions/read_utf8_yaml.R")
 source("R/functions/read_course_config.R")
 source("R/functions/make_placeholder_catalog.R")
+source("R/functions/read_catalog.R")
 source("R/functions/escape_html.R")
 source("R/functions/escape_yaml_text.R")
 source("R/functions/render_resource_link.R")
@@ -12,6 +13,7 @@ source("R/functions/render_supplementary_links.R")
 source("R/functions/render_lesson_card.R")
 source("R/functions/render_lesson_page.R")
 source("R/functions/read_semester_fragment.R")
+source("R/functions/inject_schedule_lesson_cards.R")
 source(
   "R/functions/render_redirect_page.R",
   encoding = "UTF-8"
@@ -23,6 +25,44 @@ source(
 
 config <- read_course_config()
 catalog <- make_placeholder_catalog(config)
+legacy_catalog <- catalog
+for (
+  lesson_id in names(legacy_catalog$years[["2026-27"]]$lessons)
+  ) {
+  legacy_catalog$years[["2026-27"]]$lessons[[lesson_id]]$placement <- NULL
+  legacy_catalog$years[["2026-27"]]$lessons[[lesson_id]]$repository_link <- NULL
+}
+legacy_catalog_path <- tempfile(fileext = ".json")
+on.exit(unlink(legacy_catalog_path, force = TRUE), add = TRUE)
+jsonlite::write_json(
+  legacy_catalog,
+  path = legacy_catalog_path,
+  auto_unbox = TRUE,
+  null = "null"
+)
+upgraded_catalog <-
+  read_catalog(
+    config = config,
+    path = legacy_catalog_path
+  )
+stopifnot(
+  identical(
+    upgraded_catalog$years[["2026-27"]]$lessons$L00$placement,
+    "schedule"
+  ),
+  identical(
+    upgraded_catalog$years[["2026-27"]]$lessons$L00$repository_link,
+    FALSE
+  ),
+  identical(
+    upgraded_catalog$years[["2026-27"]]$lessons$L01$placement,
+    "materials"
+  ),
+  identical(
+    upgraded_catalog$years[["2026-27"]]$lessons$L01$repository_link,
+    TRUE
+  )
+)
 output_directory <-
   tempfile(
     pattern = "hub-semester-test-",
@@ -37,6 +77,56 @@ write_site_sources(
   catalog = catalog,
   output_directory = output_directory
 )
+
+current_grid <-
+  paste(
+    readLines(
+      file.path(output_directory, "current-grid.md"),
+      encoding = "UTF-8"
+    ),
+    collapse = "\n"
+  )
+current_schedule <-
+  paste(
+    readLines(
+      file.path(output_directory, "current-rozvrh.md"),
+      encoding = "UTF-8"
+    ),
+    collapse = "\n"
+  )
+archive_schedule <-
+  paste(
+    readLines(
+      file.path(
+        output_directory,
+        "semestry",
+        "2026-27",
+        "rozvrh.qmd"
+      ),
+      encoding = "UTF-8"
+    ),
+    collapse = "\n"
+  )
+archive_grid <-
+  paste(
+    readLines(
+      file.path(
+        output_directory,
+        "semestry",
+        "2026-27",
+        "index.qmd"
+      ),
+      encoding = "UTF-8"
+    ),
+    collapse = "\n"
+  )
+count_fixed <- function(pattern, text) {
+  matches <- gregexpr(pattern, text, fixed = TRUE)[[1]]
+  if (identical(matches, -1L)) {
+    return(0L)
+  }
+  return(length(matches))
+}
 
 stopifnot(
   file.exists(
@@ -62,6 +152,26 @@ stopifnot(
   ),
   file.exists(
     file.path(output_directory, "rok", "2026-27", "index.qmd")
+  ),
+  !grepl(
+    "<span class=\"lesson-number\">L00</span>",
+    current_grid,
+    fixed = TRUE
+  ),
+  count_fixed(
+    "<span class=\"lesson-number\">L00</span>",
+    current_schedule
+  ) == 1L,
+  grepl("lesson-grid--schedule", current_schedule, fixed = TRUE),
+  grepl("P\u0159ipravujeme", current_schedule, fixed = TRUE),
+  count_fixed(
+    "<span class=\"lesson-number\">L00</span>",
+    archive_schedule
+  ) == 1L,
+  !grepl(
+    "<span class=\"lesson-number\">L00</span>",
+    archive_grid,
+    fixed = TRUE
   )
 )
 
@@ -88,6 +198,8 @@ lesson <-
   list(
     id = "L01",
     title = "Testovac\u00ed lekce",
+    placement = "materials",
+    repository_link = TRUE,
     subtitle = "Kontrola stabiln\u00edch odkaz\u016f",
     status = "published",
     release = "L01-v0.1.1-20260824",
@@ -165,6 +277,111 @@ stopifnot(
   grepl("bi bi-paperclip", current_card, fixed = TRUE),
   grepl("aria-hidden=\"true\"", current_card, fixed = TRUE),
   !grepl("ro\u010dn\u00edk", current_card, fixed = TRUE)
+)
+
+private_lesson <- lesson
+private_lesson$id <- "L00"
+private_lesson$title <- "Prvn\u00ed kroky v R"
+private_lesson$placement <- "schedule"
+private_lesson$repository_link <- FALSE
+private_lesson$release <- "L00-v0.1.0-20260928"
+private_lesson$material_base_url <-
+  "https://cuni-natur-biostatistics.github.io/L00/current/"
+private_lesson$release_base_url <-
+  paste0(
+    "https://cuni-natur-biostatistics.github.io/L00/releases/",
+    "L00-v0.1.0-20260928/"
+  )
+private_lesson$manifest$repository <- "CUNI-NATUR-Biostatistics/L00"
+
+private_card <-
+  render_lesson_card(
+    lesson = private_lesson,
+    year_slug = "2026-27",
+    channel = "current"
+  )
+stopifnot(
+  grepl("/L00/current/learning/", private_card, fixed = TRUE),
+  grepl("QMD skript", private_card, fixed = TRUE),
+  grepl("QMD prezentace", private_card, fixed = TRUE),
+  grepl("R: Cvi\u010den\u00ed", private_card, fixed = TRUE),
+  grepl("Data: Data", private_card, fixed = TRUE),
+  !grepl("bi bi-github", private_card, fixed = TRUE),
+  !grepl(
+    "github.com/CUNI-NATUR-Biostatistics/L00",
+    private_card,
+    fixed = TRUE
+  )
+)
+
+schedule_template <-
+  c(
+    "## Voliteln\u00e1 orientace L00 {#l00}",
+    "",
+    "<!-- lesson-cards: schedule -->"
+  )
+published_schedule <-
+  inject_schedule_lesson_cards(
+    schedule_content = schedule_template,
+    lessons = list(private_lesson),
+    year_slug = "2026-27",
+    channel = "current"
+  )
+stopifnot(
+  sum(
+    grepl(
+      "<span class=\"lesson-number\">L00</span>",
+      published_schedule,
+      fixed = TRUE
+    )
+  ) == 1L,
+  !any(grepl("lesson-cards: schedule", published_schedule, fixed = TRUE))
+)
+
+missing_marker_error <-
+  tryCatch(
+    {
+      inject_schedule_lesson_cards(
+        schedule_content = "Rozvrh bez zna\u010dky",
+        lessons = list(private_lesson),
+        year_slug = "2026-27"
+      )
+      NULL
+    },
+    error = identity
+  )
+duplicate_marker_error <-
+  tryCatch(
+    {
+      inject_schedule_lesson_cards(
+        schedule_content =
+          c(
+            "<!-- lesson-cards: schedule -->",
+            "<!-- lesson-cards: schedule -->"
+          ),
+        lessons = list(private_lesson),
+        year_slug = "2026-27"
+      )
+      NULL
+    },
+    error = identity
+  )
+orphan_marker_error <-
+  tryCatch(
+    {
+      inject_schedule_lesson_cards(
+        schedule_content = "<!-- lesson-cards: schedule -->",
+        lessons = list(lesson),
+        year_slug = "2026-27"
+      )
+      NULL
+    },
+    error = identity
+  )
+stopifnot(
+  inherits(missing_marker_error, "error"),
+  inherits(duplicate_marker_error, "error"),
+  inherits(orphan_marker_error, "error")
 )
 
 freeze_fixture <-

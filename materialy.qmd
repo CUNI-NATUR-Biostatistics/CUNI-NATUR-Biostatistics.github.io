@@ -6,6 +6,8 @@ page-layout: full
 
 ::: {.course-intro}
 Na jednom místě najdete skripta, prezentace, datové soubory a R skripty — textové soubory s postupem výpočtů a tvorby grafů ve statistickém softwaru R. Tlačítka vždy vedou k verzi, která je připravená pro studenty; nemusíte rozlišovat technické verze souborů.
+
+S R teprve začínáte? Podívejte se na [dobrovolnou orientaci L00 v rozvrhu](rozvrh.html#l00).
 :::
 
 {{< include _generated/current-intro.md >}}

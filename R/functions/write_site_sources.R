@@ -134,6 +134,13 @@ write_site_sources <- function(catalog, output_directory = "_generated") {
       path = current_year$content$schedule,
       expected_hash = frozen_hash(current_year, "schedule")
     )
+  current_schedule <-
+    inject_schedule_lesson_cards(
+      schedule_content = current_schedule,
+      lessons = current_year$lessons,
+      year_slug = current_year$slug,
+      channel = "current"
+    )
   current_assessment <-
     read_semester_fragment(
       path = current_year$content$assessment,
@@ -165,6 +172,9 @@ write_site_sources <- function(catalog, output_directory = "_generated") {
   for (
     lesson in current_year$lessons
     ) {
+    if (!identical(lesson$placement, "materials")) {
+      next
+    }
     vec_current_cards <-
       c(
         vec_current_cards,
@@ -233,6 +243,13 @@ write_site_sources <- function(catalog, output_directory = "_generated") {
         path = year$content$schedule,
         expected_hash = frozen_hash(year, "schedule")
       )
+    schedule_content <-
+      inject_schedule_lesson_cards(
+        schedule_content = schedule_content,
+        lessons = year$lessons,
+        year_slug = year$slug,
+        channel = "archive"
+      )
     assessment_content <-
       read_semester_fragment(
         path = year$content$assessment,
@@ -299,15 +316,17 @@ write_site_sources <- function(catalog, output_directory = "_generated") {
         con = file.path(legacy_lesson_directory, "index.qmd"),
         useBytes = TRUE
       )
-      vec_year_cards <-
-        c(
-          vec_year_cards,
-          render_lesson_card(
-            lesson = lesson,
-            year_slug = year$slug,
-            channel = "archive"
+      if (identical(lesson$placement, "materials")) {
+        vec_year_cards <-
+          c(
+            vec_year_cards,
+            render_lesson_card(
+              lesson = lesson,
+              year_slug = year$slug,
+              channel = "archive"
+            )
           )
-        )
+      }
     }
 
     year_title <- year$semester_label
