@@ -67,8 +67,23 @@ read_course_config <- function(path = "config/course.yml") {
       )
     }
 
+    card_resources <- lesson$card_resources
+    if (is.null(card_resources)) {
+      card_resources <- "all"
+    }
+    if (
+      !is.character(card_resources) ||
+        length(card_resources) != 1L ||
+        !card_resources %in% c("all", "core")
+    ) {
+      cli::cli_abort(
+        "Lesson {.val {lesson$id}} card_resources must be all or core."
+      )
+    }
+
     config$lessons[[lesson_index]]$placement <- placement
     config$lessons[[lesson_index]]$repository_link <- repository_link
+    config$lessons[[lesson_index]]$card_resources <- card_resources
   }
 
   return(config)

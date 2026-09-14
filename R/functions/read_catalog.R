@@ -45,6 +45,7 @@ read_catalog <- function(config, path = "data/catalog.json") {
       }
       lesson$placement <- lesson_config$placement
       lesson$repository_link <- lesson_config$repository_link
+      lesson$card_resources <- lesson_config$card_resources
       year$lessons[[lesson_config$id]] <- lesson
     }
     catalog$years[[year_config$slug]] <- year

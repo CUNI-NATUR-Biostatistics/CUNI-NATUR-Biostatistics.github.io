@@ -13,6 +13,7 @@ lessons:
     title: "První kroky v R"
     placement: schedule
     repository_link: false
+    card_resources: core
   - id: L01
     title: "Typy dat a popis jedné proměnné"
   - id: L02

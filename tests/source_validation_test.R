@@ -61,6 +61,7 @@ stopifnot(
   "L00" %in% names(offering$releases),
   identical(l00$placement, "schedule"),
   identical(l00$repository_link, FALSE),
+  identical(l00$card_resources, "core"),
   all(
     vapply(
       regular_lessons,
@@ -72,6 +73,13 @@ stopifnot(
     vapply(
       regular_lessons,
       function(lesson) identical(lesson$repository_link, TRUE),
+      logical(1)
+    )
+  ),
+  all(
+    vapply(
+      regular_lessons,
+      function(lesson) identical(lesson$card_resources, "all"),
       logical(1)
     )
   ),
@@ -112,6 +120,13 @@ invalid_repository_link$lessons[[1]]$repository_link <- "false"
 expect_config_error(
   candidate = invalid_repository_link,
   pattern = "repository_link must be true or false"
+)
+
+invalid_card_resources <- course_config
+invalid_card_resources$lessons[[1]]$card_resources <- "everything"
+expect_config_error(
+  candidate = invalid_card_resources,
+  pattern = "card_resources must be all or core"
 )
 
 message("HUB R syntax and YAML validation passed.")

@@ -31,6 +31,7 @@ for (
   ) {
   legacy_catalog$years[["2026-27"]]$lessons[[lesson_id]]$placement <- NULL
   legacy_catalog$years[["2026-27"]]$lessons[[lesson_id]]$repository_link <- NULL
+  legacy_catalog$years[["2026-27"]]$lessons[[lesson_id]]$card_resources <- NULL
 }
 legacy_catalog_path <- tempfile(fileext = ".json")
 on.exit(unlink(legacy_catalog_path, force = TRUE), add = TRUE)
@@ -55,12 +56,20 @@ stopifnot(
     FALSE
   ),
   identical(
+    upgraded_catalog$years[["2026-27"]]$lessons$L00$card_resources,
+    "core"
+  ),
+  identical(
     upgraded_catalog$years[["2026-27"]]$lessons$L01$placement,
     "materials"
   ),
   identical(
     upgraded_catalog$years[["2026-27"]]$lessons$L01$repository_link,
     TRUE
+  ),
+  identical(
+    upgraded_catalog$years[["2026-27"]]$lessons$L01$card_resources,
+    "all"
   )
 )
 output_directory <-
@@ -200,6 +209,7 @@ lesson <-
     title = "Testovac\u00ed lekce",
     placement = "materials",
     repository_link = TRUE,
+    card_resources = "all",
     subtitle = "Kontrola stabiln\u00edch odkaz\u016f",
     status = "published",
     release = "L01-v0.1.1-20260824",
@@ -284,13 +294,14 @@ private_lesson$id <- "L00"
 private_lesson$title <- "Prvn\u00ed kroky v R"
 private_lesson$placement <- "schedule"
 private_lesson$repository_link <- FALSE
-private_lesson$release <- "L00-v0.1.0-20260928"
+private_lesson$card_resources <- "core"
+private_lesson$release <- "L00-v0.1.0-20260913"
 private_lesson$material_base_url <-
   "https://cuni-natur-biostatistics.github.io/L00/current/"
 private_lesson$release_base_url <-
   paste0(
     "https://cuni-natur-biostatistics.github.io/L00/releases/",
-    "L00-v0.1.0-20260928/"
+    "L00-v0.1.0-20260913/"
   )
 private_lesson$manifest$repository <- "CUNI-NATUR-Biostatistics/L00"
 
@@ -300,18 +311,39 @@ private_card <-
     year_slug = "2026-27",
     channel = "current"
   )
+private_archive_card <-
+  render_lesson_card(
+    lesson = private_lesson,
+    year_slug = "2026-27",
+    channel = "archive"
+  )
 stopifnot(
+  count_fixed("class=\"resource-link", private_card) == 5L,
   grepl("/L00/current/learning/", private_card, fixed = TRUE),
-  grepl("QMD skript", private_card, fixed = TRUE),
-  grepl("QMD prezentace", private_card, fixed = TRUE),
+  grepl("Skripta HTML", private_card, fixed = TRUE),
+  grepl("Prezentace", private_card, fixed = TRUE),
+  grepl("Skripta PDF", private_card, fixed = TRUE),
+  grepl("Prezentace PDF", private_card, fixed = TRUE),
   grepl("R: Cvi\u010den\u00ed", private_card, fixed = TRUE),
-  grepl("Data: Data", private_card, fixed = TRUE),
+  !grepl("QMD skript", private_card, fixed = TRUE),
+  !grepl("QMD prezentace", private_card, fixed = TRUE),
+  !grepl("Data: Data", private_card, fixed = TRUE),
+  !grepl("P\u0159\u00edloha: Dodatek", private_card, fixed = TRUE),
   !grepl("bi bi-github", private_card, fixed = TRUE),
   !grepl(
     "github.com/CUNI-NATUR-Biostatistics/L00",
     private_card,
     fixed = TRUE
-  )
+  ),
+  count_fixed("class=\"resource-link", private_archive_card) == 5L,
+  grepl(
+    "/L00/releases/L00-v0.1.0-20260913/learning/",
+    private_archive_card,
+    fixed = TRUE
+  ),
+  !grepl("QMD", private_archive_card, fixed = TRUE),
+  !grepl("Data:", private_archive_card, fixed = TRUE),
+  !grepl("P\u0159\u00edloha:", private_archive_card, fixed = TRUE)
 )
 
 schedule_template <-

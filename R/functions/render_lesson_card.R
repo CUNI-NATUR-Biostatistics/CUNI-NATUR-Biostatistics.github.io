@@ -16,6 +16,7 @@ render_lesson_card <- function(
   channel = c("current", "archive")
 ) {
   channel <- match.arg(channel)
+  core_resources <- identical(lesson$card_resources, "core")
   status_label <- "P\u0159ipravujeme"
   status_class <- "lesson-status lesson-status--preparing"
   if (identical(lesson$status, "published")) {
@@ -164,10 +165,14 @@ render_lesson_card <- function(
         )
       )
   }
+  if (isTRUE(core_resources)) {
+    vec_sources <- character()
+  }
   vec_supplementary <-
     render_supplementary_links(
       lesson = lesson,
-      channel = channel
+      channel = channel,
+      groups = if (isTRUE(core_resources)) "exercises" else NULL
     )
   meta <-
     paste0(
