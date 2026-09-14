@@ -12,7 +12,8 @@
 
 render_supplementary_links <- function(
   lesson,
-  channel = c("current", "archive")
+  channel = c("current", "archive"),
+  groups = NULL
 ) {
   channel <- match.arg(channel)
   vec_links <- character()
@@ -23,6 +24,19 @@ render_supplementary_links <- function(
       data = list(label = "Data", icon = "database"),
       extras = list(label = "P\u0159\u00edloha", icon = "paperclip")
     )
+
+  if (!is.null(groups)) {
+    if (
+      !is.character(groups) ||
+        anyNA(groups) ||
+        any(!groups %in% names(list_groups))
+    ) {
+      cli::cli_abort(
+        "Supplementary card groups must be exercises, data, or extras."
+      )
+    }
+    list_groups <- list_groups[unique(groups)]
+  }
 
   for (
     group_name in names(list_groups)

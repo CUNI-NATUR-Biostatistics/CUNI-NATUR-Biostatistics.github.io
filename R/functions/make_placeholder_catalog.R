@@ -28,6 +28,7 @@ make_placeholder_catalog <- function(config) {
           title = lesson_config$title,
           placement = lesson_config$placement,
           repository_link = lesson_config$repository_link,
+          card_resources = lesson_config$card_resources,
           subtitle = "",
           status = "preparing",
           release = NULL,
