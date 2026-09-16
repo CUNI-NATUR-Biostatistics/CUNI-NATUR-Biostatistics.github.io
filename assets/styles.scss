@@ -29,6 +29,26 @@ body {
   color: #fff;
 }
 
+.navbar-brand-logo {
+  display: inline-flex !important;
+  flex: 0 0 auto;
+}
+
+.navbar-brand-logo .navbar-logo.light-content {
+  display: block !important;
+  width: 2rem;
+  height: 2rem;
+  min-height: 0;
+  max-height: none;
+  margin-right: 0.35rem;
+  padding: 0;
+  object-fit: contain;
+}
+
+.navbar-brand-logo .navbar-logo.dark-content {
+  display: none !important;
+}
+
 .navbar .nav-link:hover,
 .navbar .nav-link:focus-visible {
   color: var(--course-highlight);
@@ -138,6 +158,18 @@ body {
   align-content: center;
   gap: 0.55rem;
   margin: 0;
+}
+
+.course-hero__aside {
+  display: grid;
+  align-content: center;
+  gap: 1rem;
+}
+
+.course-hero__logo {
+  width: clamp(7rem, 12vw, 9.5rem);
+  height: auto;
+  margin: 0 auto;
 }
 
 .course-facts div {
@@ -681,8 +713,13 @@ table {
   }
 
   .course-hero__content,
+  .course-hero__aside,
   .course-facts {
     min-width: 0;
+  }
+
+  .course-hero__logo {
+    width: 7.5rem;
   }
 
   .hero-actions .resource-link {

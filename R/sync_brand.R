@@ -10,35 +10,70 @@
 #
 #----------------------------------------------------------#
 
-brand_files <-
+brand_source_files <-
+  c(
+    "theme/brand_theme.scss",
+    "theme/fonts-include.html",
+    "assets/logo/biostatistika-icon.svg",
+    "assets/logo/biostatistika-icon-reversed.svg"
+  )
+
+brand_target_files <-
   c(
     "brand_theme.scss",
-    "fonts-include.html"
+    "fonts-include.html",
+    "logo/biostatistika-icon.svg",
+    "logo/biostatistika-icon-reversed.svg"
   )
 
-brand_target <-
+brand_target_root <-
   file.path("assets", "brand")
-dir.create(brand_target, recursive = TRUE, showWarnings = FALSE)
+brand_target_paths <-
+  file.path(brand_target_root, brand_target_files)
 
-local_brand <-
-  file.path("..", "_brand", "theme")
-remote_brand <-
+for (
+  target_directory in unique(dirname(brand_target_paths))
+  ) {
+  dir.create(
+    path = target_directory,
+    recursive = TRUE,
+    showWarnings = FALSE
+  )
+}
+
+local_brand_root <-
+  file.path("..", "_brand")
+local_brand_paths <-
+  file.path(local_brand_root, brand_source_files)
+remote_brand_root <-
   paste0(
     "https://raw.githubusercontent.com/",
-    "CUNI-NATUR-Biostatistics/_brand/main/theme"
+    "CUNI-NATUR-Biostatistics/_brand/main"
   )
 
-brand_stage <-
-  file.path(brand_target, paste0(".", brand_files, ".tmp"))
-unlink(brand_stage, force = TRUE)
-on.exit(unlink(brand_stage, force = TRUE), add = TRUE)
+brand_stage_paths <-
+  file.path(
+    dirname(brand_target_paths),
+    paste0(".", basename(brand_target_paths), ".tmp")
+  )
+unlink(
+  x = brand_stage_paths,
+  force = TRUE
+)
+on.exit(
+  unlink(
+    x = brand_stage_paths,
+    force = TRUE
+  ),
+  add = TRUE
+)
 
 brand_source <-
-  if (all(file.exists(file.path(local_brand, brand_files)))) {
+  if (all(file.exists(local_brand_paths))) {
     copied <-
       file.copy(
-        from = file.path(local_brand, brand_files),
-        to = brand_stage,
+        from = local_brand_paths,
+        to = brand_stage_paths,
         overwrite = TRUE
       )
     if (!all(copied)) {
@@ -47,29 +82,32 @@ brand_source <-
     "local sibling _brand repository"
   } else {
     downloaded <-
-      vapply(
-        brand_files,
-        function(file_name) {
-          tryCatch(
-            {
-              utils::download.file(
-                url = paste(remote_brand, file_name, sep = "/"),
-                destfile = brand_stage[[which(brand_files == file_name)]],
-                mode = "wb",
-                quiet = TRUE
-              )
-              TRUE
-            },
-            error = function(error) FALSE
-          )
-        },
-        logical(1)
-      )
+      logical(length(brand_source_files))
+
+    for (
+      file_index in seq_along(brand_source_files)
+      ) {
+      downloaded[[file_index]] <-
+        tryCatch(
+          expr = {
+            download.file(
+              url = paste(
+                remote_brand_root,
+                brand_source_files[[file_index]],
+                sep = "/"
+              ),
+              destfile = brand_stage_paths[[file_index]],
+              mode = "wb",
+              quiet = TRUE
+            )
+            TRUE
+          },
+          error = function(error) FALSE
+        )
+    }
 
     if (!all(downloaded)) {
-      cached <-
-        file.path(brand_target, brand_files)
-      if (!all(file.exists(cached))) {
+      if (!all(file.exists(brand_target_paths))) {
         cli::cli_abort(
           paste(
             "Canonical branding could not be downloaded and the committed",
@@ -90,12 +128,10 @@ brand_source <-
   }
 
 if (brand_source != "committed fallback") {
-  staged <-
-    brand_stage
   copied <-
     file.copy(
-      from = staged,
-      to = file.path(brand_target, brand_files),
+      from = brand_stage_paths,
+      to = brand_target_paths,
       overwrite = TRUE
     )
   if (!all(copied)) {
@@ -103,30 +139,53 @@ if (brand_source != "committed fallback") {
   }
 
   synchronized <-
-    unname(tools::md5sum(staged)) ==
-      unname(tools::md5sum(file.path(brand_target, brand_files)))
+    unname(tools::md5sum(brand_stage_paths)) ==
+      unname(tools::md5sum(brand_target_paths))
   if (!all(synchronized)) {
     cli::cli_abort("The synchronized brand assets failed verification.")
   }
 }
 
 theme_text <-
-  paste(readLines(file.path(brand_target, brand_files[[1]])), collapse = "\n")
+  paste(
+    readLines(con = brand_target_paths[[1]]),
+    collapse = "\n"
+  )
 fonts_text <-
-  paste(readLines(file.path(brand_target, brand_files[[2]])), collapse = "\n")
+  paste(
+    readLines(con = brand_target_paths[[2]]),
+    collapse = "\n"
+  )
+icon_text <-
+  paste(
+    readLines(con = brand_target_paths[[3]]),
+    collapse = "\n"
+  )
 
 required_signatures <-
-  c("#5D2890", "#F4F1EC", "Inter", "Source Sans 3", "JetBrains Mono")
+  c(
+    "#5D2890",
+    "#F4F1EC",
+    "Inter",
+    "Source Sans 3",
+    "JetBrains Mono"
+  )
 brand_text <-
   paste(theme_text, fonts_text)
 has_signature <-
-  vapply(
-    required_signatures,
-    grepl,
-    logical(1),
-    x = brand_text,
-    fixed = TRUE
-  )
+  logical(length(required_signatures))
+
+for (
+  signature_index in seq_along(required_signatures)
+  ) {
+  has_signature[[signature_index]] <-
+    grepl(
+      pattern = required_signatures[[signature_index]],
+      x = brand_text,
+      fixed = TRUE
+    )
+}
+
 if (!all(has_signature)) {
   cli::cli_abort(
     paste(
@@ -136,5 +195,18 @@ if (!all(has_signature)) {
   )
 }
 
-unlink(brand_stage, force = TRUE)
+if (
+  !grepl(
+    pattern = "Biostatistika course icon",
+    x = icon_text,
+    fixed = TRUE
+  )
+) {
+  cli::cli_abort("The synchronized course icon failed verification.")
+}
+
+unlink(
+  x = brand_stage_paths,
+  force = TRUE
+)
 cli::cli_inform(paste("Brand source:", brand_source))

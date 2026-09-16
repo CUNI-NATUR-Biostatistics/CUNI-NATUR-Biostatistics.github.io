@@ -12,3 +12,4 @@
 
 **/*.quarto_ipynb
 /assets/brand/.*.tmp
+/assets/brand/logo/.*.tmp

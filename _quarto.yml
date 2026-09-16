@@ -26,10 +26,13 @@ website:
   title: "Biostatistika"
   description: "Studijní materiály ke kurzu Biostatistika a plánování ekologických pokusů (MB120P163)"
   site-url: "https://cuni-natur-biostatistics.github.io"
+  favicon: assets/brand/logo/biostatistika-icon.svg
   search:
     location: navbar
     type: overlay
   navbar:
+    logo: assets/brand/logo/biostatistika-icon-reversed.svg
+    logo-alt: "Logo kurzu Biostatistika"
     left:
       - text: Aktuální semestr
         menu:
