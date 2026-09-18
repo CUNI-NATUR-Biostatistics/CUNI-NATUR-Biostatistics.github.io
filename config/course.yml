@@ -18,14 +18,19 @@ lessons:
     title: "Typy dat a popis jedné proměnné"
   - id: L02
     title: "Vztahy dvou proměnných a vizualizace"
+    repository_link: false
   - id: L03
     title: "Lineární model s jedním numerickým prediktorem"
+    repository_link: false
   - id: L04
     title: "Od odhadu k nejistotě"
+    repository_link: false
   - id: L05
     title: "Od velikosti efektu k testování hypotéz"
+    repository_link: false
   - id: L06
     title: "Kategoriální prediktory: od dvou skupin k ANOVA"
+    repository_link: false
   - id: L07
     title: "Více prediktorů: aditivní model a korelace prediktorů"
   - id: L08
