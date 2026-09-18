@@ -72,7 +72,10 @@ stopifnot(
   all(
     vapply(
       regular_lessons,
-      function(lesson) identical(lesson$repository_link, TRUE),
+      function(lesson) {
+        expected <- !lesson$id %in% sprintf("L%02d", 2:6)
+        identical(lesson$repository_link, expected)
+      },
       logical(1)
     )
   ),
