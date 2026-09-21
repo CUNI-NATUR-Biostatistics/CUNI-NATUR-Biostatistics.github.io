@@ -53,7 +53,7 @@ stopifnot(
   ),
   identical(
     upgraded_catalog$years[["2026-27"]]$lessons$L00$repository_link,
-    FALSE
+    TRUE
   ),
   identical(
     upgraded_catalog$years[["2026-27"]]$lessons$L00$card_resources,
@@ -304,6 +304,23 @@ private_lesson$release_base_url <-
     "L00-v0.1.0-20260913/"
   )
 private_lesson$manifest$repository <- "CUNI-NATUR-Biostatistics/L00"
+public_core_lesson <- private_lesson
+public_core_lesson$repository_link <- TRUE
+public_core_card <-
+  render_lesson_card(
+    lesson = public_core_lesson,
+    year_slug = "2026-27",
+    channel = "current"
+  )
+stopifnot(
+  count_fixed("class=\"resource-link", public_core_card) == 6L,
+  grepl(
+    "github.com/CUNI-NATUR-Biostatistics/L00/tree/main",
+    public_core_card,
+    fixed = TRUE
+  ),
+  !grepl("QMD skript", public_core_card, fixed = TRUE)
+)
 
 private_card <-
   render_lesson_card(

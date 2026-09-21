@@ -143,6 +143,9 @@ render_lesson_card <- function(
         icon = "file-earmark-code"
       )
     )
+  if (isTRUE(core_resources)) {
+    vec_sources <- character()
+  }
   if (!identical(lesson$repository_link, FALSE)) {
     repository_ref <- "main"
     if (identical(channel, "archive")) {
@@ -164,9 +167,6 @@ render_lesson_card <- function(
           icon = "github"
         )
       )
-  }
-  if (isTRUE(core_resources)) {
-    vec_sources <- character()
   }
   vec_supplementary <-
     render_supplementary_links(

@@ -17,12 +17,14 @@ Praktika navazují na pondělní přednášku příslušného týdne. Při zápi
 
 ## Volitelná orientace L00 {#l00}
 
-První úterní a čtvrteční termíny před začátkem přednášek slouží jako dobrovolná orientace v R a RStudio:
+Před začátkem pravidelné výuky proběhne dobrovolná orientace v R a RStudiu ve dvou termínech:
 
-- **úterý 29. září 2026** pro úterní skupiny;
-- **čtvrtek 1. října 2026** pro čtvrteční skupinu.
+- **úterý 29. září 2026, 9:00–10:30**;
+- **čtvrtek 1. října 2026, 9:00–10:30**.
 
-Studenti pondělních skupin mohou základní orientaci projít samostatně podle veřejných materiálů L00. Účast na L00 není podmínkou absolvování kurzu.
+Oba termíny mají stejný obsah a studenti si mohou vybrat kterýkoli z nich bez ohledu na svou praktickou skupinu. Účast na L00 není podmínkou absolvování kurzu; základní orientaci lze projít také samostatně podle veřejných materiálů L00.
+
+Pokud se chcete prezenční L00 zúčastnit, [přihlaste se prosím prostřednictvím krátkého formuláře](https://docs.google.com/forms/d/e/1FAIpQLSfTWY0Cv45e3W-i_8TmvE7JbRNgRxtNJHfsr6H6NEp6XuL6qA/viewform) do **25. září 2026**. Ve formuláři zvolíte preferovaný termín a uvedete kontaktní e-mail pro případné organizační informace.
 
 <!-- lesson-cards: schedule -->
 
