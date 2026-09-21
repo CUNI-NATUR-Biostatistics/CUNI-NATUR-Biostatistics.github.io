@@ -33,6 +33,7 @@ lessons:
     repository_link: false
   - id: L07
     title: "Více prediktorů: aditivní model a korelace prediktorů"
+    repository_link: false
   - id: L08
     title: "Interakce prediktorů"
   - id: L09
