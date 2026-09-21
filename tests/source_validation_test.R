@@ -60,7 +60,7 @@ stopifnot(
   identical(offering$semester_status, "preliminary"),
   "L00" %in% names(offering$releases),
   identical(l00$placement, "schedule"),
-  identical(l00$repository_link, FALSE),
+  identical(l00$repository_link, TRUE),
   identical(l00$card_resources, "core"),
   all(
     vapply(
@@ -73,7 +73,7 @@ stopifnot(
     vapply(
       regular_lessons,
       function(lesson) {
-        expected <- !lesson$id %in% sprintf("L%02d", 2:6)
+        expected <- lesson$id != "L07"
         identical(lesson$repository_link, expected)
       },
       logical(1)
