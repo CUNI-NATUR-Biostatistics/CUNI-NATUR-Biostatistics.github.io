@@ -71,7 +71,12 @@ class AssembleLessonPagesTest < Minitest::Test
     output = root + "lesson-site"
     github_output = root + "github-output.txt"
     stdout, stderr, status = Open3.capture3(
-      { "GITHUB_OUTPUT" => github_output.to_s },
+      {
+        "GITHUB_OUTPUT" => github_output.to_s,
+        "GITHUB_SHA" => "abc123",
+        "GITHUB_RUN_ID" => "456",
+        "GITHUB_RUN_ATTEMPT" => "2"
+      },
       "ruby",
       SCRIPT.to_s,
       (root + "bundles").to_s,
@@ -97,6 +102,19 @@ class AssembleLessonPagesTest < Minitest::Test
       assert_includes File.read(output + "index.html"), "url=preview/"
       refute_predicate output + "current", :exist?
       assert_includes File.read(github_output), "current_tag=\n"
+      assert_equal(
+        {
+          "lesson" => "L01",
+          "current_tag" => nil,
+          "source_sha" => "abc123",
+          "run_id" => "456",
+          "run_attempt" => "2"
+        },
+        JSON.parse(File.read(output + "deployment.json"))
+      )
+      assert_equal 24, (output + "deployment-checks").children.length
+      assert_predicate output + "deployment-checks/456-2-initial-01.json", :file?
+      assert_predicate output + "deployment-checks/456-2-retry-12.json", :file?
     end
   end
 
@@ -118,6 +136,10 @@ class AssembleLessonPagesTest < Minitest::Test
       assert_includes File.read(output + "releases/L01-v1.0.0-20260824/index.html"), "url=learning/index.html"
       assert_includes File.read(output + "index.html"), "url=current/"
       assert_includes File.read(github_output), "current_tag=L01-v1.0.0-20260824"
+      assert_equal(
+        "L01-v1.0.0-20260824",
+        JSON.parse(File.read(output + "deployment.json")).fetch("current_tag")
+      )
     end
   end
 

@@ -1,0 +1,35 @@
+name: Verify lesson Pages deployment
+description: Confirm that the exact assembled Pages artifact is publicly available.
+
+inputs:
+  base-url:
+    description: Public GitHub Pages base URL for the lesson repository.
+    required: true
+  site-directory:
+    description: Local assembled Pages directory containing deployment.json.
+    required: false
+    default: lesson-site
+  attempts:
+    description: Maximum number of public-route checks.
+    required: false
+    default: "6"
+  interval-seconds:
+    description: Delay between checks.
+    required: false
+    default: "10"
+  phase:
+    description: Unique marker family for the initial deployment or retry.
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Verify deployed marker and stable routes
+      shell: bash
+      run: >-
+        ruby "$GITHUB_ACTION_PATH/verify_lesson_pages.rb"
+        "${{ inputs.base-url }}"
+        "${{ inputs.site-directory }}"
+        "${{ inputs.attempts }}"
+        "${{ inputs.interval-seconds }}"
+        "${{ inputs.phase }}"

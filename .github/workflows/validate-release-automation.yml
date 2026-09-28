@@ -37,6 +37,9 @@ jobs:
         run: |
           ruby -c .github/actions/package-website-release/package_website_release.rb
           ruby -c .github/actions/assemble-lesson-pages/assemble_lesson_pages.rb
+          ruby -c .github/actions/verify-lesson-pages/verify_lesson_pages.rb
 
       - name: Run release automation fixtures
-        run: ruby tests/release_automation/assemble_lesson_pages_test.rb
+        run: |
+          ruby tests/release_automation/assemble_lesson_pages_test.rb
+          ruby tests/release_automation/verify_lesson_pages_test.rb

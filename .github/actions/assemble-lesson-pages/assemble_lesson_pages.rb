@@ -232,6 +232,32 @@ write_redirect.call(
   "Otev&#345;&#237;t materi&#225;ly lekce"
 )
 File.write(output_directory + ".nojekyll", "")
+deployment_marker = {
+  "lesson" => preview_lesson,
+  "current_tag" => current&.fetch("tag", nil),
+  "source_sha" => ENV.fetch("GITHUB_SHA", ""),
+  "run_id" => ENV.fetch("GITHUB_RUN_ID", ""),
+  "run_attempt" => ENV.fetch("GITHUB_RUN_ATTEMPT", "")
+}
+File.write(
+  output_directory + "deployment.json",
+  JSON.pretty_generate(deployment_marker) + "\n"
+)
+deployment_checks = output_directory + "deployment-checks"
+FileUtils.mkdir_p(deployment_checks)
+%w[initial retry].product((1..12).to_a).each do |phase, attempt|
+  marker_name = format(
+    "%s-%s-%s-%02d.json",
+    deployment_marker.fetch("run_id"),
+    deployment_marker.fetch("run_attempt"),
+    phase,
+    attempt
+  )
+  File.write(
+    deployment_checks + marker_name,
+    JSON.pretty_generate(deployment_marker) + "\n"
+  )
+end
 
 github_output = ENV["GITHUB_OUTPUT"]
 if github_output && !github_output.empty?

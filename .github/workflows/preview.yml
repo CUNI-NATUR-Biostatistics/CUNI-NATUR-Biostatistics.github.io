@@ -15,7 +15,7 @@ jobs:
       id-token: write
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      url: ${{ steps.deployment_retry.outputs.page_url || steps.deployment.outputs.page_url }}
 
     steps:
       - name: Check out preview source from main
@@ -54,3 +54,29 @@ jobs:
       - name: Deploy lesson Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Verify lesson Pages deployment
+        id: verify_initial
+        continue-on-error: true
+        uses: CUNI-NATUR-Biostatistics/CUNI-NATUR-Biostatistics.github.io/.github/actions/verify-lesson-pages@main
+        with:
+          base-url: ${{ steps.deployment.outputs.page_url }}
+          site-directory: lesson-site
+          attempts: "6"
+          interval-seconds: "10"
+          phase: initial
+
+      - name: Redeploy lesson Pages after stale verification
+        id: deployment_retry
+        if: steps.verify_initial.outcome == 'failure'
+        uses: actions/deploy-pages@v4
+
+      - name: Verify lesson Pages after redeployment
+        if: steps.verify_initial.outcome == 'failure'
+        uses: CUNI-NATUR-Biostatistics/CUNI-NATUR-Biostatistics.github.io/.github/actions/verify-lesson-pages@main
+        with:
+          base-url: ${{ steps.deployment_retry.outputs.page_url }}
+          site-directory: lesson-site
+          attempts: "12"
+          interval-seconds: "10"
+          phase: retry
