@@ -20,7 +20,7 @@ page-layout: full
 <dl class="course-facts" aria-label="Základní informace o kurzu">
 <div><dt><i class="bi bi-book" aria-hidden="true"></i>Kód</dt><dd>MB120P163</dd></div>
 <div><dt><i class="bi bi-calendar3" aria-hidden="true"></i>Semestr</dt><dd>Zimní 2026/27</dd></div>
-<div><dt><i class="bi bi-clock" aria-hidden="true"></i>Výuka</dt><dd>90 min přednáška + 90 min praktikum týdně</dd></div>
+<div><dt><i class="bi bi-clock" aria-hidden="true"></i>Výuka</dt><dd>90 min přednáška + 120 min praktikum týdně</dd></div>
 <div><dt><i class="bi bi-award" aria-hidden="true"></i>Kredity</dt><dd>5</dd></div>
 <div><dt><i class="bi bi-translate" aria-hidden="true"></i>Jazyk</dt><dd>Čeština</dd></div>
 <div><dt><i class="bi bi-building" aria-hidden="true"></i>Instituce</dt><dd>Přírodovědecká fakulta UK</dd></div>

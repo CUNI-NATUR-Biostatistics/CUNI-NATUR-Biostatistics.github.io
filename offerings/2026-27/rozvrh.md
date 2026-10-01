@@ -1,4 +1,4 @@
-<div class="status-note status-note--warning"><strong>Předběžný rozvrh.</strong> Údaje vycházejí z rozvrhu SIS uloženého 26. srpna 2026. Zápis skupin a případné pozdější změny kontrolujte v SIS; neveřejná operativní oznámení budou v Moodle.</div>
+<div class="status-note status-note--warning"><strong>Předběžný rozvrh.</strong> Údaje byly ověřeny v SIS 1. října 2026. Zápis skupin a případné pozdější změny kontrolujte v SIS; neveřejná operativní oznámení budou v Moodle.</div>
 
 ## Pravidelná výuka
 
@@ -6,11 +6,11 @@
 | Typ výuky | Den a čas | Místnost | Vyučující |
 |---|---|---|---|
 | Přednáška | pondělí 12:20–13:50 | B14 | Ondřej Mottl |
-| Praktikum 1 | pondělí 14:50–16:20 | B5 | Jiří Hadrava |
-| Praktikum 2 | pondělí 15:40–17:10 | B12 | Natálie Námešná |
-| Praktikum 3 | úterý 9:00–10:30 | B5 | Vojtěch Abraham |
-| Praktikum 4 | úterý 12:20–13:50 | B5 | Tomáš Jor |
-| Praktikum 5 | čtvrtek 9:00–10:30 | B5 | Eva Matoušková |
+| Praktikum 1 | pondělí 14:50–16:50 | B5 | Jiří Hadrava |
+| Praktikum 2 | pondělí 15:40–17:40 | B12 | Natálie Námešná |
+| Praktikum 3 | úterý 9:00–11:00 | B5 | Vojtěch Abraham |
+| Praktikum 4 | úterý 12:20–14:20 | B5 | Tomáš Jor |
+| Praktikum 5 | čtvrtek 9:00–11:00 | B5 | Eva Matoušková |
 :::
 
 Praktika navazují na pondělní přednášku příslušného týdne. Při zápisu se řiďte konkrétní skupinou v SIS.
