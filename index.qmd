@@ -86,7 +86,7 @@ Po absolvování kurzu dokážete:
 ## Kde hledat informace
 
 <div class="system-grid">
-<article class="system-card system-card--primary"><p class="eyebrow">Hlavní zdroj</p><div class="system-card__title"><i class="bi bi-compass" aria-hidden="true"></i><h3><a href="/materialy.html">HUB</a></h3></div><p>Aktuální popis kurzu, rozvrh, pravidla hodnocení, veřejné studijní materiály a archiv semestrů.</p></article>
+<article class="system-card system-card--primary"><p class="eyebrow">Hlavní zdroj</p><div class="system-card__title"><i class="bi bi-compass" aria-hidden="true"></i><h3><a href="/materialy.html">Web kurzu (HUB)</a></h3></div><p>Aktuální popis kurzu, rozvrh, pravidla hodnocení, veřejné studijní materiály a archiv semestrů.</p></article>
 <article class="system-card"><p class="eyebrow">Oficiální evidence</p><div class="system-card__title"><i class="bi bi-building" aria-hidden="true"></i><h3><a href="https://is.cuni.cz/studium/predmety/index.php?do=predmet&amp;kod=MB120P163">SIS</a></h3></div><p>Zápis do předmětu a skupin, termíny zkoušek a formální studijní záznamy.</p></article>
 <article class="system-card"><p class="eyebrow">Soukromá výuka</p><div class="system-card__title"><i class="bi bi-shield-lock" aria-hidden="true"></i><h3><a href="https://dl2.cuni.cz/course/view.php?id=106">Moodle</a></h3></div><p>Testy, zadání, odevzdávání, výsledky a oznámení určená pouze zapsaným studentům.</p></article>
 </div>

@@ -38,7 +38,7 @@ Stránka **Materiály** vždy odkazuje na poslední verzi každé lekce schvále
 
 ## Doporučená literatura
 
-K absolvování kurzu **stačí materiály zveřejněné na tomto webu**: skripta, prezentace, R skripty a data. Literatura je nepovinná a hodí se, když chcete látku vidět z jiného úhlu nebo si ji procvičit na dalších příkladech. Požadavky kurzu určují materiály na HUBu, ne uvedené knihy.
+K absolvování kurzu **stačí materiály zveřejněné na tomto webu**: skripta, prezentace, R skripty a data. Literatura je nepovinná a hodí se, když chcete látku vidět z jiného úhlu nebo si ji procvičit na dalších příkladech. Požadavky kurzu určují tyto materiály, ne uvedené knihy.
 
 ### Knihy
 
