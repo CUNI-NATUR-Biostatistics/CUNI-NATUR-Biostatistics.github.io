@@ -1,6 +1,6 @@
 ---
 title: "Jak pracovat s materiály"
-description: "Jak se připravovat na výuku, začít se statistickým softwarem R a vybrat správný studijní materiál."
+description: "Jak se připravovat na výuku, začít se statistickým softwarem R, vybrat správný studijní materiál a najít doporučenou literaturu."
 ---
 
 ## Co jsou R a RStudio
@@ -35,6 +35,31 @@ Nainstalujte R i RStudio Desktop. Pokud s programováním začínáte, využijte
 ## Stabilní a archivované verze
 
 Stránka **Materiály** vždy odkazuje na poslední verzi každé lekce schválenou pro studenty. Opravy, které vyučující teprve připravují, tento odkaz nezmění. **Archiv** uchovává materiály tak, jak byly používány v konkrétním semestru; uzavřený semestr se už nemění.
+
+## Doporučená literatura
+
+K absolvování kurzu **stačí materiály zveřejněné na tomto webu**: skripta, prezentace, R skripty a data. Literatura je nepovinná a hodí se, když chcete látku vidět z jiného úhlu nebo si ji procvičit na dalších příkladech. Požadavky kurzu určují materiály na HUBu, ne uvedené knihy.
+
+### Knihy
+
+| Zdroj | K čemu se hodí |
+|---|---|
+| Lepš, J., Šmilauer, P. (2024): *Biostatistika*, 2. přepracované vydání. Nakladatelství Jihočeské univerzity, České Budějovice. ISBN 978-80-7694-066-6. (česky) | Česká učebnice statistiky pro biology s postupy v programech Statistica a R. |
+| Crawley, M. J. (2013): *The R Book*, 2. vydání. John Wiley & Sons, Chichester. (anglicky) | Rozsáhlá příručka k R a statistickým postupům v něm. |
+| Dalgaard, P.: *Introductory Statistics with R*. Springer. (anglicky) | Stručný úvod do statistiky s ukázkami v R. |
+
+### Online zdroje v angličtině
+
+| Zdroj | K čemu se hodí |
+|---|---|
+| Wickham, H., Çetinkaya-Rundel, M., Grolemund, G.: [*R for Data Science*](https://r4ds.hadley.nz/), 2. vydání. | Práce s daty a grafy v R. |
+| Ismay, C., Kim, A. Y., Valdivia, A.: [*Statistical Inference via Data Science: A ModernDive into R and the Tidyverse*](https://moderndive.com/v2/), 2. vydání. | Statistické myšlení a R krok za krokem. |
+| Thulin, M. (2024): [*Modern Statistics with R: From Wrangling and Exploring Data to Inference and Predictive Modelling*](https://modernstatisticswithr.com/), 2. vydání. | Statistika od základů po regresní modely a predikci, včetně simulací a bootstrapu; vše s příklady v R. |
+| Gosnell, J. S.: [*Biostatistics: Concepts and Approaches for Collecting Good Data and Turning It into Knowledge*](https://jsgosnell.github.io/cuny_biostats_book/). | Biostatistika z biologického pohledu: sběr dat, testování hypotéz, analýza rozptylu a regrese s příklady z přírody a výpočty v R. |
+| Irizarry, R. A.: *Introduction to Data Science*. [Část 1: Data Wrangling and Visualization with R](https://rafalab.dfci.harvard.edu/dsbook-part-1/); [část 2: Statistics and Prediction Algorithms Through Case Studies](https://rafalab.dfci.harvard.edu/dsbook-part-2/). | Část 1: práce s daty a vizualizace v R (tidyverse, ggplot2). Část 2: pravděpodobnost, statistická inference a lineární modely na případových studiích. |
+| Irizarry, R. A., Love, M. I.: [*PH525x Series – Biomedical Data Science*](https://genomicsclass.github.io/book/). | Statistika a analýza dat v biomedicíně a genomice (např. RNA-seq). Zaměřením je užší než náš kurz. |
+
+Online zdroje mohou používat jiný styl zápisu R kódu než naše materiály nebo pokrývat širší témata. Závazný rozsah kurzu, terminologii a požadavky vymezují materiály na tomto webu.
 
 ## Když se něco nedaří
 
