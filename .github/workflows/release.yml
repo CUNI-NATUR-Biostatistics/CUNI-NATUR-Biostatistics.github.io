@@ -134,13 +134,17 @@ jobs:
         uses: actions/configure-pages@v5
 
       - name: Upload Pages artifact
+        id: upload
         uses: actions/upload-pages-artifact@v4
         with:
           path: lesson-site
 
       - name: Deploy lesson Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: CUNI-NATUR-Biostatistics/CUNI-NATUR-Biostatistics.github.io/.github/actions/deploy-lesson-pages@main
+        with:
+          artifact-id: ${{ steps.upload.outputs.artifact_id }}
+          phase: initial
 
       - name: Verify lesson Pages deployment
         id: verify_initial
@@ -156,7 +160,10 @@ jobs:
       - name: Redeploy lesson Pages after stale verification
         id: deployment_retry
         if: steps.verify_initial.outcome == 'failure'
-        uses: actions/deploy-pages@v4
+        uses: CUNI-NATUR-Biostatistics/CUNI-NATUR-Biostatistics.github.io/.github/actions/deploy-lesson-pages@main
+        with:
+          artifact-id: ${{ steps.upload.outputs.artifact_id }}
+          phase: retry
 
       - name: Verify lesson Pages after redeployment
         if: steps.verify_initial.outcome == 'failure'
