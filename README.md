@@ -98,7 +98,9 @@ Workflow `publish.yml` reaguje na push do `main`, ruční spuštění a událost
 Týdenní repozitáře volají dva znovupoužitelné workflow uložené v tomto repozitáři:
 
 - `preview.yml` sestaví `/preview/` po změně commitnutých HTML na `main` a zachová existující stabilní kanály;
-- `release.yml` vytvoří release balíček, obnoví `/current/`, zachová `/preview/` a volitelně odešle událost `lesson-released` do HUBu.
+- `release.yml` vytvoří release balíček, poté na `main` spustí lekční `preview.yml`, který nasadí Pages s novým `/current/` a `/releases/<tag>/` a zachová `/preview/`, a nakonec volitelně odešle událost `lesson-released` do HUBu.
+
+Release workflow nenasazuje Pages sám. Tag obvykle ukazuje na commit, který po sloučení do `main` už nasadil `preview.yml`, a `actions/deploy-pages` rozpoznává nasazení podle SHA commitu; druhé nasazení stejného commitu by proto nové sestavení nezveřejnilo. Volající `release.yml` v týdenním repozitáři musí jobu `release` udělit oprávnění `actions: write`, aby mohl `preview.yml` spustit.
 
 Pro okamžitou aktualizaci HUBu používá release workflow secrets `HUB_APP_ID` a `HUB_APP_PRIVATE_KEY`. Bez nich se release a lekční Pages nasadí, ale HUB je potřeba obnovit ručním spuštěním `Publish course hub` nebo dalším pushem do jeho `main`.
 
