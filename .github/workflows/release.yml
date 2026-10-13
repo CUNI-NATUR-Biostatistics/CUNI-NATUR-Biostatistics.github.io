@@ -88,88 +88,99 @@ jobs:
           fail_on_unmatched_files: true
           generate_release_notes: true
 
-  pages:
+  # Lesson Pages are published by the lesson's own preview workflow.
+  #
+  # A release tag usually points at a commit that "Publish preview" already
+  # deployed after the merge to main. actions/deploy-pages identifies a Pages
+  # deployment by the commit SHA, so deploying that SHA again from this
+  # workflow silently reuses the earlier deployment and the release build never
+  # goes live. Dispatching preview.yml after the GitHub Release exists instead
+  # produces a fresh deployment whose assembled site already selects the newest
+  # release as current/. The preview workflow keeps its own deployment check.
+  publish:
     needs: release
     runs-on: ubuntu-latest
-    concurrency:
-      group: ${{ github.repository }}-lesson-pages
-      cancel-in-progress: false
     permissions:
+      actions: write
       contents: read
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment_retry.outputs.page_url || steps.deployment.outputs.page_url }}
     outputs:
-      current_tag: ${{ steps.assemble.outputs.current_tag }}
+      current_tag: ${{ steps.current.outputs.current_tag }}
 
     steps:
-      - name: Check out preview source from main
-        uses: actions/checkout@v4
-        with:
-          ref: main
-
-      - name: Download all website release bundles
+      - name: Dispatch the lesson preview workflow on main
+        id: dispatch
         env:
           GH_TOKEN: ${{ github.token }}
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p bundles
-          gh api --paginate "repos/${GITHUB_REPOSITORY}/releases?per_page=100" \
-            --jq '.[] | .tag_name as $tag | .assets[] | select(.name | startswith("web-materials-")) | [$tag, .name] | @tsv' |
-          while IFS=$'\t' read -r tag asset; do
-            mkdir -p "bundles/${tag}"
-            gh release download "$tag" --repo "$GITHUB_REPOSITORY" --pattern "$asset" --dir "bundles/${tag}"
+          started="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          echo "started=${started}" >> "$GITHUB_OUTPUT"
+          gh workflow run preview.yml --repo "$GITHUB_REPOSITORY" --ref main
+          echo "Dispatched preview.yml on main at ${started}."
+
+      - name: Wait for the dispatched Pages deployment
+        env:
+          GH_TOKEN: ${{ github.token }}
+          STARTED: ${{ steps.dispatch.outputs.started }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          # Newest preview run on main created after the dispatch. A later push
+          # to main can supersede a pending dispatched run in the shared
+          # lesson-pages concurrency group; the newer run assembles the same
+          # releases, so it is followed instead.
+          latest_run() {
+            gh run list --repo "$GITHUB_REPOSITORY" --workflow preview.yml \
+              --branch main --limit 20 --json databaseId,createdAt \
+              --jq "[.[] | select(.createdAt >= \"${STARTED}\")] | sort_by(.createdAt) | last | .databaseId // empty"
+          }
+
+          run_id=""
+          for attempt in $(seq 1 30); do
+            run_id="$(latest_run)"
+            [ -n "$run_id" ] && break
+            sleep 10
           done
+          if [ -z "$run_id" ]; then
+            echo "ERROR: No preview run on main appeared after the dispatch at ${STARTED}."
+            exit 1
+          fi
 
-      - name: Assemble immutable routes and current alias
-        id: assemble
-        uses: CUNI-NATUR-Biostatistics/CUNI-NATUR-Biostatistics.github.io/.github/actions/assemble-lesson-pages@main
-        with:
-          require-releases: "true"
+          for round in 1 2 3; do
+            echo "Following preview run ${run_id}: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${run_id}"
+            if gh run watch "$run_id" --repo "$GITHUB_REPOSITORY" --exit-status --interval 15 > /dev/null; then
+              echo "Preview run ${run_id} published lesson Pages."
+              exit 0
+            fi
+            conclusion="$(gh run view "$run_id" --repo "$GITHUB_REPOSITORY" --json conclusion --jq .conclusion)"
+            newer="$(latest_run)"
+            if [ "$conclusion" = "cancelled" ] && [ -n "$newer" ] && [ "$newer" != "$run_id" ]; then
+              echo "Preview run ${run_id} was superseded by run ${newer}."
+              run_id="$newer"
+              continue
+            fi
+            echo "ERROR: Preview run ${run_id} finished with conclusion '${conclusion}'."
+            exit 1
+          done
+          echo "ERROR: Preview runs kept being superseded; check the lesson Pages manually."
+          exit 1
 
-      - name: Configure GitHub Pages
-        uses: actions/configure-pages@v5
-
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v4
-        with:
-          path: lesson-site
-
-      - name: Deploy lesson Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
-
-      - name: Verify lesson Pages deployment
-        id: verify_initial
-        continue-on-error: true
-        uses: CUNI-NATUR-Biostatistics/CUNI-NATUR-Biostatistics.github.io/.github/actions/verify-lesson-pages@main
-        with:
-          base-url: ${{ steps.deployment.outputs.page_url }}
-          site-directory: lesson-site
-          attempts: "6"
-          interval-seconds: "10"
-          phase: initial
-
-      - name: Redeploy lesson Pages after stale verification
-        id: deployment_retry
-        if: steps.verify_initial.outcome == 'failure'
-        uses: actions/deploy-pages@v4
-
-      - name: Verify lesson Pages after redeployment
-        if: steps.verify_initial.outcome == 'failure'
-        uses: CUNI-NATUR-Biostatistics/CUNI-NATUR-Biostatistics.github.io/.github/actions/verify-lesson-pages@main
-        with:
-          base-url: ${{ steps.deployment_retry.outputs.page_url }}
-          site-directory: lesson-site
-          attempts: "12"
-          interval-seconds: "10"
-          phase: retry
+      - name: Read the current release from lesson Pages
+        id: current
+        shell: bash
+        run: |
+          set -euo pipefail
+          owner="${GITHUB_REPOSITORY_OWNER,,}"
+          repo="${GITHUB_REPOSITORY#*/}"
+          url="https://${owner}.github.io/${repo}/current/manifest.json?verify_run=${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          current_tag="$(curl --fail --silent --show-error --location "$url" | ruby -rjson -e 'puts JSON.parse($stdin.read).fetch("tag")')"
+          echo "Lesson Pages current/ serves ${current_tag}."
+          echo "current_tag=${current_tag}" >> "$GITHUB_OUTPUT"
 
   notify-hub:
-    needs: [release, pages]
+    needs: [release, publish]
     runs-on: ubuntu-latest
     permissions: {}
     env:
@@ -192,7 +203,7 @@ jobs:
           GH_TOKEN: ${{ steps.app-token.outputs.token }}
           LESSON: ${{ needs.release.outputs.lesson }}
           ACADEMIC_YEAR: ${{ needs.release.outputs.academic_year }}
-          RELEASE_TAG: ${{ needs.pages.outputs.current_tag }}
+          RELEASE_TAG: ${{ needs.publish.outputs.current_tag }}
         shell: bash
         run: |
           gh api --method POST \
