@@ -83,6 +83,14 @@ render_lesson_page <- function(lesson, year) {
           channel = "archive"
         )
       ),
+      render_supplementary_links(
+        lesson = lesson,
+        channel = "archive",
+        groups = c("exercises", "data")
+      )
+    )
+  vec_extra <-
+    c(
       render_resource_link(
         label = "QMD skript",
         href = get_public_resource_url(
@@ -101,7 +109,8 @@ render_lesson_page <- function(lesson, year) {
       ),
       render_supplementary_links(
         lesson = lesson,
-        channel = "archive"
+        channel = "archive",
+        groups = "extras"
       )
     )
 
@@ -133,6 +142,7 @@ render_lesson_page <- function(lesson, year) {
       "<div class=\"lesson-actions\">",
       paste(vec_actions, collapse = ""),
       "</div>",
+      render_extra_resources(vec_extra),
       "",
       "## Prezentace",
       "",

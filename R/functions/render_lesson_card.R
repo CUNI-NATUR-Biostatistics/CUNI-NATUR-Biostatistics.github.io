@@ -168,12 +168,31 @@ render_lesson_card <- function(
         )
       )
   }
-  vec_supplementary <-
-    render_supplementary_links(
-      lesson = lesson,
-      channel = channel,
-      groups = if (isTRUE(core_resources)) "exercises" else NULL
+  vec_main <-
+    c(
+      vec_primary,
+      render_supplementary_links(
+        lesson = lesson,
+        channel = channel,
+        groups = if (isTRUE(core_resources)) {
+          "exercises"
+        } else {
+          c("exercises", "data")
+        }
+      )
     )
+  vec_extra <- vec_sources
+  if (!isTRUE(core_resources)) {
+    vec_extra <-
+      c(
+        vec_extra,
+        render_supplementary_links(
+          lesson = lesson,
+          channel = channel,
+          groups = "extras"
+        )
+      )
+  }
   meta <-
     paste0(
       escape_html(lesson$release),
@@ -187,11 +206,9 @@ render_lesson_card <- function(
     paste0(
       top,
       "<div class=\"resource-group\">",
-      paste(vec_primary, collapse = ""),
+      paste(vec_main, collapse = ""),
       "</div>",
-      "<div class=\"resource-group\">",
-      paste(c(vec_sources, vec_supplementary), collapse = ""),
-      "</div>",
+      render_extra_resources(vec_extra),
       "<div class=\"lesson-card__meta\">",
       meta,
       "</div>",
