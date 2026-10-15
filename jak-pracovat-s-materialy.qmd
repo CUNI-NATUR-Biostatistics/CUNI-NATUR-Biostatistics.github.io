@@ -21,6 +21,8 @@ Nainstalujte R i RStudio Desktop. Pokud s programováním začínáte, využijte
 
 ## Co znamenají odkazy u lekce
 
+Skripta, prezentace, R skripty a data jsou na kartě lekce vždy vidět. QMD zdroje, repozitář a přílohy najdete po rozbalení části **Pro vyučující a zájemce**.
+
 | Odkaz | K čemu slouží |
 |---|---|
 | Skripta HTML | Hlavní, prohledávatelný studijní text pro čtení online. |
@@ -31,6 +33,7 @@ Nainstalujte R i RStudio Desktop. Pokud s programováním začínáte, využijte
 | Data | Datové soubory potřebné pro danou lekci. |
 | QMD zdroj | Soubor, ze kterého vznikl text nebo prezentace. Je určen hlavně zájemcům; pro běžné studium jej nepotřebujete. |
 | Repozitář | Zdrojová a pracovní historie lekce, pokud je repozitář veřejně zpřístupněn. Pro běžné studium jej nepotřebujete a jeho obsah může být napřed oproti schváleným materiálům. |
+| Příloha | Doplňující dokumenty, například licence materiálů a kódu nebo původ výukových dat. |
 
 ## Stabilní a archivované verze
 

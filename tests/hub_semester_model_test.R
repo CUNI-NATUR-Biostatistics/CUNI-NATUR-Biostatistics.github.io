@@ -10,6 +10,7 @@ source("R/functions/render_resource_link.R")
 source("R/functions/get_public_resource_url.R")
 source("R/functions/format_release_date.R")
 source("R/functions/render_supplementary_links.R")
+source("R/functions/render_extra_resources.R")
 source("R/functions/render_lesson_card.R")
 source("R/functions/render_lesson_page.R")
 source("R/functions/read_semester_fragment.R")
@@ -289,6 +290,43 @@ stopifnot(
   !grepl("ro\u010dn\u00edk", current_card, fixed = TRUE)
 )
 
+# Student resources stay visible; sources and extras sit in the
+# collapsed teacher section.
+get_position <- function(pattern, text) {
+  position <- regexpr(pattern, text, fixed = TRUE)[[1]]
+  stopifnot(position > 0L)
+  return(position)
+}
+extra_start <- get_position("<details class=\"resource-extra\"", current_card)
+stopifnot(
+  count_fixed("<details", current_card) == 1L,
+  extra_start > 0L,
+  get_position("R: ", current_card) < extra_start,
+  get_position("Data: ", current_card) < extra_start,
+  get_position("QMD skript", current_card) > extra_start,
+  get_position("QMD prezentace", current_card) > extra_start,
+  get_position("bi bi-github", current_card) > extra_start,
+  get_position("P\u0159\u00edloha: ", current_card) > extra_start
+)
+
+lesson_page <-
+  paste(
+    render_lesson_page(
+      lesson = lesson,
+      year = list(label = "2026/27")
+    ),
+    collapse = "\n"
+  )
+page_extra_start <-
+  get_position("<details class=\"resource-extra\"", lesson_page)
+stopifnot(
+  page_extra_start > 0L,
+  get_position("R: ", lesson_page) < page_extra_start,
+  get_position("Data: ", lesson_page) < page_extra_start,
+  get_position("QMD skript", lesson_page) > page_extra_start,
+  get_position("P\u0159\u00edloha: ", lesson_page) > page_extra_start
+)
+
 private_lesson <- lesson
 private_lesson$id <- "L00"
 private_lesson$title <- "Prvn\u00ed kroky v R"
@@ -314,6 +352,7 @@ public_core_card <-
   )
 stopifnot(
   count_fixed("class=\"resource-link", public_core_card) == 6L,
+  count_fixed("<details", public_core_card) == 1L,
   grepl(
     "github.com/CUNI-NATUR-Biostatistics/L00/tree/main",
     public_core_card,
@@ -336,6 +375,8 @@ private_archive_card <-
   )
 stopifnot(
   count_fixed("class=\"resource-link", private_card) == 5L,
+  !grepl("<details", private_card, fixed = TRUE),
+  !grepl("<details", private_archive_card, fixed = TRUE),
   grepl("/L00/current/learning/", private_card, fixed = TRUE),
   grepl("Skripta HTML", private_card, fixed = TRUE),
   grepl("Prezentace", private_card, fixed = TRUE),

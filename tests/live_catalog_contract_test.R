@@ -12,6 +12,7 @@ source("R/functions/render_resource_link.R")
 source("R/functions/get_public_resource_url.R")
 source("R/functions/format_release_date.R")
 source("R/functions/render_supplementary_links.R")
+source("R/functions/render_extra_resources.R")
 source("R/functions/render_lesson_card.R")
 
 config <- read_course_config()
