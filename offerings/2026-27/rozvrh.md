@@ -1,4 +1,4 @@
-<div class="status-note status-note--warning"><strong>Předběžný rozvrh.</strong> Údaje byly ověřeny v SIS 1. října 2026. Zápis skupin a případné pozdější změny kontrolujte v SIS; neveřejná operativní oznámení budou v Moodle.</div>
+<div class="status-note status-note--warning"><strong>Předběžný rozvrh.</strong> Údaje byly ověřeny v SIS 1. října 2026. Zápis skupin a případné pozdější změny kontrolujte v SIS.</div>
 
 ## Pravidelná výuka
 
@@ -43,9 +43,11 @@ Pokud se chcete prezenční L00 zúčastnit, [přihlaste se prosím prostřednic
 | 23. listopadu 2026 | L08 | Interakce prediktorů |
 | 30. listopadu 2026 | L09 | Porovnání kandidátních modelů: R², adjustované R² a AIC |
 | 7. prosince 2026 | L10 | Nelinearita a transformace |
-| 14. prosince 2026 | L11 | Hierarchická data: proč jednoduchý lineární model někdy nestačí |
-| 4. ledna 2027 | L12 | GLM: binární a početní odezva |
+| 14. prosince 2026 | L11 | GLM: binární a početní odezva |
+| 4. ledna 2027 | L12 | Hierarchická data: proč jednoduchý lineární model někdy nestačí |
 :::
+
+Lekce L12 má pouze přednášku. V týdnu 4.–8. ledna 2027 se praktika nekonají; v čase a místnosti každé praktické skupiny se místo nich píše řádný zápočet (viz [Hodnocení](hodnoceni.qmd)).
 
 ## Svátky a dosud nepotvrzené náhrady
 

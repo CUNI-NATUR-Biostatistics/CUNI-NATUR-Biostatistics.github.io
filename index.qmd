@@ -76,8 +76,8 @@ Po absolvování kurzu dokážete:
 - rozpoznat a interpretovat interakci prediktorů;
 - porovnat kandidátní modely pomocí AIC a obhájit volbu finálního modelu;
 - zachytit nelinearitu a zvolit jednoduché řešení pomocí transformace nebo vhodné funkce;
-- rozpoznat hierarchii v datech, například opakovaná měření, lokality nebo bloky, a určit, kdy je potřeba rozšíření modelu;
 - zvolit vhodný model pro kategoriální odezvu a zdůvodnit, proč lineární model nestačí pro binární data;
+- rozpoznat hierarchii v datech, například opakovaná měření, lokality nebo bloky, a určit, kdy je potřeba rozšíření modelu;
 - sestavit základní workflow analýzy v R: načtení dat → vizualizace → model → diagnostika → interpretace.
 :::
 
