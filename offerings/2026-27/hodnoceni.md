@@ -79,9 +79,11 @@ Při domácím učení, procvičování a práci s veřejnými materiály může
 
 Při kontrolovaném praktickém zápočtu a zkoušce jsou **internet, komunikační nástroje a AI zakázány**.
 
-Při praktickém zápočtu lze použít zadání a data pro daný termín, R a RStudio v připraveném prostředí, lokální nápovědu nainstalovaných balíčků a offline kopie oficiálních studijních materiálů a předchozích praktických R skriptů. Při zkoušce lze použít pouze přehled funkcí, vzorců nebo interpretačních pomůcek dodaný se zadáním a další pomůcky výslovně oznámené před termínem.
+Při praktickém zápočtu pracujete se zadáním a daty pro daný termín v R a RStudiu, na počítači v učebně nebo na vlastním notebooku. Můžete používat vlastní materiály k programování v R (například vlastní vytištěné nebo napsané poznámky).
 
-Vlastní poznámky, dříve vypracovaná řešení a komunikace s dalšími osobami nejsou povoleny, pokud vyučující pro konkrétní termín výslovně nestanoví jinak.
+Zkouška neobsahuje programování v R a při ní nejsou povoleny **žádné pomůcky**.
+
+Komunikace s dalšími osobami není povolena při zápočtu ani při zkoušce.
 
 ## Technické potíže
 
