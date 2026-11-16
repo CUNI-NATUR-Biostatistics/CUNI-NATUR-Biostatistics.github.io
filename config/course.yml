@@ -37,4 +37,4 @@ lessons:
   - id: L11
     title: "GLM: binární a početní odezva"
   - id: L12
-    title: "Hierarchická data: proč jednoduchý lm někdy nestačí"
+    title: "Hierarchická data: proč jednoduchý lineární model někdy nestačí"
